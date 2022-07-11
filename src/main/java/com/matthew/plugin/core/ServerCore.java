@@ -3,7 +3,10 @@ package com.matthew.plugin.core;
 import com.matthew.plugin.core.commands.HealCommand;
 import com.matthew.plugin.core.commands.gamemode.command.GamemodeCommand;
 import com.matthew.plugin.core.commands.gamemode.listener.GamemodeListener;
+import com.matthew.plugin.core.events.OutOfBoundsListener;
 import com.matthew.plugin.core.events.PlayerChatListener;
+import com.matthew.plugin.core.events.PlayerJoinLeaveListener;
+import com.matthew.plugin.core.events.ServerListPingListener;
 import com.matthew.plugin.core.ranks.commands.RankCommand;
 import com.matthew.plugin.core.ranks.events.RanksListener;
 import org.bukkit.Bukkit;
@@ -60,6 +63,9 @@ public final class ServerCore extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new RanksListener(), this);
         Bukkit.getPluginManager().registerEvents(new PlayerChatListener(), this);
         Bukkit.getPluginManager().registerEvents(new GamemodeListener(), this);
+        Bukkit.getPluginManager().registerEvents(new PlayerJoinLeaveListener(), this);
+        Bukkit.getPluginManager().registerEvents(new ServerListPingListener(), this);
+        Bukkit.getPluginManager().registerEvents(new OutOfBoundsListener(), this);
     }
 
     private void openConnection() throws SQLException {
