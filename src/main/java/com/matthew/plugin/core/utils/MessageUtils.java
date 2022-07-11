@@ -17,4 +17,8 @@ public class MessageUtils {
         player.sendMessage(ChatColor.BLUE + ">> " + ChatColor.GRAY + "Player not found.");
     }
 
+    public static void sendCustomMessage(Player player, String message) {
+        player.sendMessage(ChatColor.BLUE + ">> " + ChatColor.GRAY + message);
+    }
+
 }

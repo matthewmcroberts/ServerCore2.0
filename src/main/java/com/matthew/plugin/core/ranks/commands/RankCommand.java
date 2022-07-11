@@ -1,6 +1,5 @@
 package com.matthew.plugin.core.ranks.commands;
 
-import com.matthew.plugin.core.ServerCore;
 import com.matthew.plugin.core.ranks.Ranks;
 import com.matthew.plugin.core.ranks.apis.RankManager;
 import com.matthew.plugin.core.utils.MessageUtils;
@@ -18,13 +17,16 @@ public class RankCommand implements CommandExecutor {
 
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         Player player = (Player) sender;
+
         try {
             if (RankUtils.isAdmin(player)) {
                 if (args.length == 2) {
-                    if (Bukkit.getOfflinePlayer(args[0]).hasPlayedBefore()) {
+
+                    //if the player is online
+                    if (Bukkit.getPlayerExact(args[0]) != null) {
+                        Player target = Bukkit.getPlayerExact(args[0]);
                         if (RankUtils.isValidRank(args[1])) {
-                            RankManager.setRank(Bukkit.getPlayer(args[0]), Ranks.valueOf(args[1].toUpperCase()));
-                            Player target = Bukkit.getPlayerExact(args[0]);
+                            RankManager.setRank(target.getPlayer(), Ranks.valueOf(args[1].toUpperCase()));
                             player.sendMessage(ChatColor.BLUE + ">> " + ChatColor.GRAY + "Updated " + ChatColor.GOLD + target.getName() + "'s " + ChatColor.GRAY + "rank to " + ChatColor.GOLD + args[1] + ".");
                             if (Bukkit.getOfflinePlayer(args[0]).isOnline()) {
                                 if(target != player) {
@@ -34,8 +36,18 @@ public class RankCommand implements CommandExecutor {
                         } else {
                             RankUtils.unknownRank(player);
                         }
+
+                        //if the player is offline and is in the database
+                    } else if(Bukkit.getOfflinePlayer(Bukkit.getOfflinePlayer(args[0]).getUniqueId()).hasPlayedBefore()){
+                        if (RankUtils.isValidRank(args[1])) {
+                            RankManager.setRank(Bukkit.getOfflinePlayer(args[0]), Ranks.valueOf(args[1].toUpperCase()));
+                            player.sendMessage(ChatColor.BLUE + ">> " + ChatColor.GRAY + "Updated " + ChatColor.GOLD + Bukkit.getOfflinePlayer(args[0]).getName() + "'s " + ChatColor.GRAY + "rank to " + ChatColor.GOLD + args[1] + ".");
+
+                        } else {
+                            RankUtils.unknownRank(player);
+                        }
                     } else {
-                        player.sendMessage(ChatColor.BLUE + ">> " + ChatColor.GOLD + args[0] + ChatColor.GRAY + " has never played before.");
+                        MessageUtils.sendCustomMessage(player, ChatColor.YELLOW + "0" + ChatColor.GRAY + " matches for player in database.");
                     }
                 } else {
                     MessageUtils.incorrectUsage(player, "/setrank (player) (rank_name)");
