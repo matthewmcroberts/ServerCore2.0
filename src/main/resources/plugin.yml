@@ -6,3 +6,6 @@ api-version: 1.8.8
 commands:
   setrank:
     aliases: [rank]
+  heal:
+  gamemode:
+    aliases: [gm]

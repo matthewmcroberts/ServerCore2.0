@@ -11,8 +11,10 @@ public class MessageUtils {
 
     public static void adminRank(Player player) {
         player.sendMessage(ChatColor.BLUE + ">> " + ChatColor.GRAY + "You must have" + ChatColor.RED + " " + ChatColor.BOLD + "ADMIN " + ChatColor.GRAY + "rank or higher to use this command.");
-
     }
 
+    public static void playerNotFound(Player player) {
+        player.sendMessage(ChatColor.BLUE + ">> " + ChatColor.GRAY + "Player not found.");
+    }
 
 }

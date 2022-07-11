@@ -1,5 +1,8 @@
 package com.matthew.plugin.core;
 
+import com.matthew.plugin.core.commands.HealCommand;
+import com.matthew.plugin.core.commands.gamemode.command.GamemodeCommand;
+import com.matthew.plugin.core.commands.gamemode.listener.GamemodeListener;
 import com.matthew.plugin.core.events.PlayerChatListener;
 import com.matthew.plugin.core.ranks.commands.RankCommand;
 import com.matthew.plugin.core.ranks.events.RanksListener;
@@ -15,7 +18,6 @@ import java.sql.SQLException;
 
 public final class ServerCore extends JavaPlugin {
 
-
     private static Connection connection;
     private final String host = "localhost";
     private final String database = "testserver";
@@ -29,7 +31,7 @@ public final class ServerCore extends JavaPlugin {
     public void onEnable() {
 
         instance = this;
-        
+
         try {
             openConnection();
             System.out.println("Connected to database");
@@ -48,14 +50,16 @@ public final class ServerCore extends JavaPlugin {
 
     }
 
-
     public void registerCommands() {
         getCommand("setrank").setExecutor(new RankCommand());
+        getCommand("heal").setExecutor(new HealCommand());
+        getCommand("gamemode").setExecutor(new GamemodeCommand());
     }
 
     public void registerListeners() {
         Bukkit.getPluginManager().registerEvents(new RanksListener(), this);
         Bukkit.getPluginManager().registerEvents(new PlayerChatListener(), this);
+        Bukkit.getPluginManager().registerEvents(new GamemodeListener(), this);
     }
 
     private void openConnection() throws SQLException {
