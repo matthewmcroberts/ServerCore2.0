@@ -1,6 +1,6 @@
 package com.matthew.plugin.core.commands.playermsg.commands;
 
-import com.matthew.plugin.core.commands.playermsg.MessageManager;
+
 import com.matthew.plugin.core.utils.MessageUtils;
 import com.matthew.plugin.core.utils.RankUtils;
 import org.bukkit.ChatColor;
@@ -16,44 +16,7 @@ public class ReplyCommand implements CommandExecutor {
 
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 
-        Player player = (Player) sender;
 
-        try {
-            if (RankUtils.isMember(player)) {
-                if (args.length > 0) {
-                    if (MessageManager.getRecentlyMessaged().containsKey(player)) {
-                        if (MessageManager.getRecentlyMessaged().get(player) != null) {
-                            Player target = MessageManager.getRecentlyMessaged().get(player);
-                            //if (Main.getVanishManager().getVanishedState(target) != true) {
-                                StringBuilder message = new StringBuilder();
-                                for (int i = 0; i < args.length; i++)
-                                    message.append(args[i]).append(" ");
-                                player.sendMessage(ChatColor.BLUE + player.getName() + " > " +
-                                        target.getName() + ChatColor.GRAY + " " + message);
-                                target.sendMessage(ChatColor.BLUE + player.getName() + " > " +
-                                        target.getName() + ChatColor.GRAY + " " + message);
-                                target.playSound(target.getLocation(), Sound.SUCCESSFUL_HIT, 1.0F, 1F);
-
-                           // } else {
-                           //     MessageUtils.playerNotFound(player);
-                           // }
-                        } else {
-                            MessageUtils.playerNotFound(player);
-                        }
-                    } else {
-                        player.sendMessage(
-                                ChatColor.BLUE + ">> " + ChatColor.GRAY + "You have not messaged anyone recently.");
-                    }
-                } else {
-                    MessageUtils.incorrectUsage(player, "/reply (message)");
-                }
-            } else {
-                player.sendMessage(ChatColor.BLUE + ">> " + ChatColor.GRAY + "You must have" + ChatColor.DARK_GRAY + " " + ChatColor.BOLD + "MEMBER " + ChatColor.GRAY + "rank or higher to use this command.");
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
 
         return false;
     }

@@ -4,9 +4,10 @@ import com.matthew.plugin.core.commands.HealCommand;
 import com.matthew.plugin.core.commands.adminhelp.AdminHelpCommand;
 import com.matthew.plugin.core.commands.adminhelp.AdminHelpReplyCommand;
 import com.matthew.plugin.core.commands.gamemode.command.GamemodeCommand;
-import com.matthew.plugin.core.commands.gamemode.listener.GamemodeListener;
+import com.matthew.plugin.core.commands.gamemode.events.GamemodeListener;
 import com.matthew.plugin.core.commands.playermsg.commands.MessageCommand;
 import com.matthew.plugin.core.commands.playermsg.commands.ReplyCommand;
+import com.matthew.plugin.core.commands.playermsg.events.MessagesListener;
 import com.matthew.plugin.core.events.OutOfBoundsListener;
 import com.matthew.plugin.core.events.PlayerChatListener;
 import com.matthew.plugin.core.events.PlayerJoinLeaveListener;
@@ -48,6 +49,7 @@ public final class ServerCore extends JavaPlugin {
 
         registerCommands();
         registerListeners();
+        runConstructors();
 
         getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "\n\nServerCore has been enabled\n");
 
@@ -74,6 +76,11 @@ public final class ServerCore extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new PlayerJoinLeaveListener(), this);
         Bukkit.getPluginManager().registerEvents(new ServerListPingListener(), this);
         Bukkit.getPluginManager().registerEvents(new OutOfBoundsListener(), this);
+        Bukkit.getPluginManager().registerEvents(new MessagesListener(), this);
+    }
+
+    public void runConstructors() {
+
     }
 
     private void openConnection() throws SQLException {

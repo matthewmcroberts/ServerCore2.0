@@ -1,4 +1,4 @@
-package com.matthew.plugin.core.commands.gamemode.listener;
+package com.matthew.plugin.core.commands.gamemode.events;
 
 import com.matthew.plugin.core.commands.gamemode.api.GamemodeManager;
 import org.bukkit.ChatColor;
