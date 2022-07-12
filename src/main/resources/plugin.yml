@@ -12,3 +12,7 @@ commands:
   a:
     aliases: [admin]
   ma:
+  message:
+    aliases: [msg]
+  reply:
+    aliases: [r]

@@ -5,6 +5,8 @@ import com.matthew.plugin.core.commands.adminhelp.AdminHelpCommand;
 import com.matthew.plugin.core.commands.adminhelp.AdminHelpReplyCommand;
 import com.matthew.plugin.core.commands.gamemode.command.GamemodeCommand;
 import com.matthew.plugin.core.commands.gamemode.listener.GamemodeListener;
+import com.matthew.plugin.core.commands.playermsg.commands.MessageCommand;
+import com.matthew.plugin.core.commands.playermsg.commands.ReplyCommand;
 import com.matthew.plugin.core.events.OutOfBoundsListener;
 import com.matthew.plugin.core.events.PlayerChatListener;
 import com.matthew.plugin.core.events.PlayerJoinLeaveListener;
@@ -61,6 +63,8 @@ public final class ServerCore extends JavaPlugin {
         getCommand("gamemode").setExecutor(new GamemodeCommand());
         getCommand("a").setExecutor(new AdminHelpCommand());
         getCommand("ma").setExecutor(new AdminHelpReplyCommand());
+        getCommand("message").setExecutor(new MessageCommand());
+        getCommand("reply").setExecutor(new ReplyCommand());
     }
 
     public void registerListeners() {
