@@ -1,6 +1,8 @@
 package com.matthew.plugin.core;
 
 import com.matthew.plugin.core.commands.HealCommand;
+import com.matthew.plugin.core.commands.adminhelp.AdminHelpCommand;
+import com.matthew.plugin.core.commands.adminhelp.AdminHelpReplyCommand;
 import com.matthew.plugin.core.commands.gamemode.command.GamemodeCommand;
 import com.matthew.plugin.core.commands.gamemode.listener.GamemodeListener;
 import com.matthew.plugin.core.events.OutOfBoundsListener;
@@ -57,6 +59,8 @@ public final class ServerCore extends JavaPlugin {
         getCommand("setrank").setExecutor(new RankCommand());
         getCommand("heal").setExecutor(new HealCommand());
         getCommand("gamemode").setExecutor(new GamemodeCommand());
+        getCommand("a").setExecutor(new AdminHelpCommand());
+        getCommand("ma").setExecutor(new AdminHelpReplyCommand());
     }
 
     public void registerListeners() {

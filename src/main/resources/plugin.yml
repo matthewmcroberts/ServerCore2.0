@@ -9,3 +9,6 @@ commands:
   heal:
   gamemode:
     aliases: [gm]
+  a:
+    aliases: [admin]
+  ma:
