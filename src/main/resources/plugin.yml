@@ -21,3 +21,4 @@ commands:
   vanish:
     aliases: [v]
   give:
+  effect:
