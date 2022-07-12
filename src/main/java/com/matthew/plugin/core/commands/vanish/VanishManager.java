@@ -1,6 +1,7 @@
 package com.matthew.plugin.core.commands.vanish;
 
 import com.matthew.plugin.core.ServerCore;
+import com.matthew.plugin.core.commands.vanish.utils.VanishUtils;
 import com.matthew.plugin.core.ranks.Ranks;
 import com.matthew.plugin.core.ranks.apis.RankManager;
 import org.bukkit.Bukkit;
@@ -47,52 +48,30 @@ public class VanishManager {
         vanished.add(player);
         setVanished(player, true);
         for (Player target : Bukkit.getOnlinePlayers()) {
-            Ranks targetRank = RankManager.getRank(target);
             switch (RankManager.getRank(player).getName()) {
-                case "DEV":
-                    if (targetRank.getName().equalsIgnoreCase("owner")) {
-                        target.showPlayer(player);
-                    } else {
-                        target.hidePlayer(player);
-                    }
-                    break;
                 case "ADMIN":
-                    if (targetRank.getName().equalsIgnoreCase("owner")
-                            || targetRank.getName().equalsIgnoreCase("dev")
-                            || targetRank.getName().equalsIgnoreCase("admin")) {
+                    if (VanishUtils.isAdmin(target)) {
                         target.showPlayer(player);
                     } else {
                         target.hidePlayer(player);
                     }
                     break;
                 case "SR.MOD":
-                    if (targetRank.getName().equalsIgnoreCase("owner")
-                            || targetRank.getName().equalsIgnoreCase("dev")
-                            || targetRank.getName().equalsIgnoreCase("admin")
-                            || targetRank.getName().equalsIgnoreCase("srmod")) {
+                    if (VanishUtils.isSrMod(target)) {
                         target.showPlayer(player);
                     } else {
                         target.hidePlayer(player);
                     }
                     break;
                 case "MOD":
-                    if (targetRank.getName().equalsIgnoreCase("owner")
-                            || targetRank.getName().equalsIgnoreCase("dev")
-                            || targetRank.getName().equalsIgnoreCase("admin")
-                            || targetRank.getName().equalsIgnoreCase("srmod")
-                            || targetRank.getName().equalsIgnoreCase("mod")) {
+                    if (VanishUtils.isMod(target)) {
                         target.showPlayer(player);
                     } else {
                         target.hidePlayer(player);
                     }
                     break;
                 case "JR.MOD":
-                    if (targetRank.getName().equalsIgnoreCase("owner")
-                            || targetRank.getName().equalsIgnoreCase("dev")
-                            || targetRank.getName().equalsIgnoreCase("admin")
-                            || targetRank.getName().equalsIgnoreCase("srmod")
-                            || targetRank.getName().equalsIgnoreCase("mod")
-                            || targetRank.getName().equalsIgnoreCase("jrmod")) {
+                    if (VanishUtils.isJrMod(target)) {
                         target.showPlayer(player);
                     } else {
                         target.hidePlayer(player);
