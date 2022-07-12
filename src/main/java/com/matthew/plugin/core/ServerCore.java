@@ -1,5 +1,6 @@
 package com.matthew.plugin.core;
 
+import com.matthew.plugin.core.commands.GiveCommand;
 import com.matthew.plugin.core.commands.HealCommand;
 import com.matthew.plugin.core.commands.adminhelp.AdminHelpCommand;
 import com.matthew.plugin.core.commands.adminhelp.AdminHelpReplyCommand;
@@ -77,6 +78,7 @@ public final class ServerCore extends JavaPlugin {
         getCommand("reply").setExecutor(new ReplyCommand());
         getCommand("tp").setExecutor(new TeleportCommand());
         getCommand("vanish").setExecutor(new VanishCommand());
+        getCommand("give").setExecutor(new GiveCommand());
     }
 
     public void registerListeners() {
