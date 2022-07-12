@@ -37,7 +37,7 @@ public class VanishedPlayerJoinEvent implements Listener {
                     VanishManager.vanished.add(p);
                     for (Player target : Bukkit.getOnlinePlayers()) {
                         Ranks targetRank = RankManager.getRank(target);
-                        switch (RankManager.getRank(target).getName()) {
+                        switch (RankManager.getRank(p).getName()) {
                             case "DEV":
                                 if (targetRank.getName().equalsIgnoreCase("owner")) {
                                     target.showPlayer(p);
@@ -92,6 +92,7 @@ public class VanishedPlayerJoinEvent implements Listener {
                     p.sendMessage(ChatColor.BLUE + ">>-------------------------------<<");
                     p.sendMessage(ChatColor.GRAY + " Vanish mode is currently " + ChatColor.GREEN + "enabled");
                     p.sendMessage(ChatColor.BLUE + ">>-------------------------------<<");
+
                 }
             }
         } catch (SQLException ex) {
