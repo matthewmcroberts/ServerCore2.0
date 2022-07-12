@@ -1,4 +1,4 @@
-package com.matthew.plugin.core.commands.playermsg.commands;
+package com.matthew.plugin.core.commands.playermsg;
 
 
 import com.matthew.plugin.core.ServerCore;

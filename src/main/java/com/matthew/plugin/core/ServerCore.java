@@ -5,8 +5,8 @@ import com.matthew.plugin.core.commands.adminhelp.AdminHelpCommand;
 import com.matthew.plugin.core.commands.adminhelp.AdminHelpReplyCommand;
 import com.matthew.plugin.core.commands.gamemode.command.GamemodeCommand;
 import com.matthew.plugin.core.commands.gamemode.events.GamemodeListener;
-import com.matthew.plugin.core.commands.playermsg.commands.MessageCommand;
-import com.matthew.plugin.core.commands.playermsg.commands.ReplyCommand;
+import com.matthew.plugin.core.commands.playermsg.MessageCommand;
+import com.matthew.plugin.core.commands.playermsg.ReplyCommand;
 import com.matthew.plugin.core.commands.playermsg.events.MessagesListener;
 import com.matthew.plugin.core.commands.teleport.TeleportCommand;
 import com.matthew.plugin.core.events.OutOfBoundsListener;
@@ -17,15 +17,19 @@ import com.matthew.plugin.core.ranks.commands.RankCommand;
 import com.matthew.plugin.core.ranks.events.RanksListener;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.HashMap;
 
 
 public final class ServerCore extends JavaPlugin {
+
+    public static HashMap<Player, Player> recentlyMessaged = new HashMap<>();
 
     private static Connection connection;
     private final String host = "localhost";
@@ -105,5 +109,7 @@ public final class ServerCore extends JavaPlugin {
     public static ServerCore getInstance() {
         return instance;
     }
+
+
 
 }
