@@ -61,8 +61,8 @@ public class TeleportUtils {
 
     public static void incorrectUsage(Player player) {
         MessageUtils.incorrectUsage(player, "/tp (player)");
-        player.sendMessage(ChatColor.BLUE + "    -" + ChatColor.DARK_RED + "/tp here (player)");
-        player.sendMessage(ChatColor.BLUE + "    -" + ChatColor.DARK_RED + "/tp (player) (target)");
-        player.sendMessage(ChatColor.BLUE + "    -" + ChatColor.DARK_RED + "/tp all");
+        player.sendMessage(ChatColor.BLUE + "    - " + ChatColor.DARK_RED + "/tp here (player)");
+        player.sendMessage(ChatColor.BLUE + "    - " + ChatColor.DARK_RED + "/tp (player) (target)");
+        player.sendMessage(ChatColor.BLUE + "    - " + ChatColor.DARK_RED + "/tp all");
     }
 }
