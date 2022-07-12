@@ -52,7 +52,7 @@ public class TeleportUtils {
                 MessageUtils.sendCustomMessage(player, "You were teleported to " + ChatColor.GOLD + target.getName());
                 MessageUtils.sendCustomMessage(sender, "Successfully teleported " + ChatColor.GOLD + player.getName() + ChatColor.GRAY + " to " + ChatColor.GOLD + target.getName());
             } else {
-                MessageUtils.playerNotFound(player);
+                MessageUtils.playerNotFound(sender);
             }
         } else {
             MessageUtils.adminRank(sender);
