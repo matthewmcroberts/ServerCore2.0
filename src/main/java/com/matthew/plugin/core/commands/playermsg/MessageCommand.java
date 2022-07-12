@@ -1,6 +1,7 @@
 package com.matthew.plugin.core.commands.playermsg;
 
 import com.matthew.plugin.core.ServerCore;
+import com.matthew.plugin.core.commands.vanish.VanishManager;
 import com.matthew.plugin.core.utils.MessageUtils;
 import com.matthew.plugin.core.utils.RankUtils;
 import org.bukkit.Bukkit;
@@ -22,33 +23,30 @@ public class MessageCommand implements CommandExecutor {
         try {
             if (RankUtils.isMember(player)) {
                 if (args.length >= 2) {
-                    if (Bukkit.getPlayerExact(args[0]) != null) {
-                        Player target = Bukkit.getPlayerExact(args[0]);
-                        //if (Main.getVanishManager().getVanishedState(target) != true) {
-                        //if (!main.getMessageManager().pmToggle.contains(target.getUniqueId())) {
+                    Player target = Bukkit.getPlayerExact(args[0]);
+                    if (Bukkit.getPlayerExact(args[0]) != null && !VanishManager.getIfVanished(target)) {
 
-                        StringBuilder message = new StringBuilder();
-                        for (int i = 1; i < args.length; i++) {
-                            message.append(args[i]).append(" ");
-                        }
+                            //if (!main.getMessageManager().pmToggle.contains(target.getUniqueId())) {
 
-                        player.sendMessage(ChatColor.BLUE + player.getName() + " > " + target.getName() + ChatColor.GRAY + " " + message.toString());
-                        target.sendMessage(ChatColor.BLUE + player.getName() + " > " + target.getName() + ChatColor.GRAY + " " + message.toString());
-                        target.playSound(target.getLocation(), Sound.SUCCESSFUL_HIT, 1.0F, 1F);
+                                StringBuilder message = new StringBuilder();
+                                for (int i = 1; i < args.length; i++) {
+                                    message.append(args[i]).append(" ");
+                                }
 
-                        if (ServerCore.recentlyMessaged.containsKey(player)) {
-                            ServerCore.recentlyMessaged.remove(player);
-                        }
+                                player.sendMessage(ChatColor.BLUE + player.getName() + " > " + target.getName() + ChatColor.GRAY + " " + message.toString());
+                                target.sendMessage(ChatColor.BLUE + player.getName() + " > " + target.getName() + ChatColor.GRAY + " " + message.toString());
+                                target.playSound(target.getLocation(), Sound.SUCCESSFUL_HIT, 1.0F, 1F);
 
-                        ServerCore.recentlyMessaged.put(player, target);
+                                if (ServerCore.recentlyMessaged.containsKey(player)) {
+                                    ServerCore.recentlyMessaged.remove(player);
+                                }
 
-                        //} else {
-                        //player.sendMessage(ChatColor.BLUE + ">> " + ChatColor.GOLD + target.getName() + ChatColor.GOLD + "'s" +ChatColor.GRAY + " messages are disabled.");
+                                ServerCore.recentlyMessaged.put(player, target);
 
-                        //}
-                        //} else {
-                        //player.sendMessage(ChatColor.BLUE + ">> " + ChatColor.GRAY + "Player not found.");
-                        //}
+                            //} else {
+                                //player.sendMessage(ChatColor.BLUE + ">> " + ChatColor.GOLD + target.getName() + ChatColor.GOLD + "'s" + ChatColor.GRAY + " messages are disabled.");
+                            //}
+
                     } else {
                         MessageUtils.playerNotFound(player);
                     }

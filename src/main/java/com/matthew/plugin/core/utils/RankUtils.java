@@ -46,6 +46,14 @@ public class RankUtils {
         return false;
     }
 
+    public static boolean isNotStaff(Player player) throws SQLException {
+        if(RankManager.getRank(player).equals(Ranks.GOD) || RankManager.getRank(player).equals(Ranks.SLAYER) || RankManager.getRank(player).equals(Ranks.BUILDER)
+                || RankManager.getRank(player).equals(Ranks.KNOWN) || RankManager.getRank(player).equals(Ranks.MEMBER)) {
+            return true;
+        }
+        return false;
+    }
+
     public static boolean isJrMod(Player player) throws SQLException {
         if(RankManager.getRank(player).equals(Ranks.ADMIN) || RankManager.getRank(player).equals(Ranks.DEV) || RankManager.getRank(player).equals(Ranks.QAT) || player.isOp()
                 || RankManager.getRank(player).equals(Ranks.SRMOD) || RankManager.getRank(player).equals(Ranks.MOD) || RankManager.getRank(player).equals(Ranks.JRMOD)) {

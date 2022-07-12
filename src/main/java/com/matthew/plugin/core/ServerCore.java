@@ -7,8 +7,8 @@ import com.matthew.plugin.core.commands.gamemode.command.GamemodeCommand;
 import com.matthew.plugin.core.commands.gamemode.events.GamemodeListener;
 import com.matthew.plugin.core.commands.playermsg.MessageCommand;
 import com.matthew.plugin.core.commands.playermsg.ReplyCommand;
-import com.matthew.plugin.core.commands.playermsg.events.MessagesListener;
 import com.matthew.plugin.core.commands.teleport.TeleportCommand;
+import com.matthew.plugin.core.commands.vanish.commands.VanishCommand;
 import com.matthew.plugin.core.events.OutOfBoundsListener;
 import com.matthew.plugin.core.events.PlayerChatListener;
 import com.matthew.plugin.core.events.PlayerJoinLeaveListener;
@@ -73,6 +73,7 @@ public final class ServerCore extends JavaPlugin {
         getCommand("message").setExecutor(new MessageCommand());
         getCommand("reply").setExecutor(new ReplyCommand());
         getCommand("tp").setExecutor(new TeleportCommand());
+        getCommand("vanish").setExecutor(new VanishCommand());
     }
 
     public void registerListeners() {
@@ -82,7 +83,6 @@ public final class ServerCore extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new PlayerJoinLeaveListener(), this);
         Bukkit.getPluginManager().registerEvents(new ServerListPingListener(), this);
         Bukkit.getPluginManager().registerEvents(new OutOfBoundsListener(), this);
-        Bukkit.getPluginManager().registerEvents(new MessagesListener(), this);
     }
 
     public void runConstructors() {

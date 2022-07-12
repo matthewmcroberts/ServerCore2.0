@@ -18,3 +18,5 @@ commands:
     aliases: [r]
   tp:
     aliases: [teleport]
+  vanish:
+    aliases: [v]
