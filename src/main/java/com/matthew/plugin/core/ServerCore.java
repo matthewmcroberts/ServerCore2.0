@@ -9,6 +9,9 @@ import com.matthew.plugin.core.commands.playermsg.MessageCommand;
 import com.matthew.plugin.core.commands.playermsg.ReplyCommand;
 import com.matthew.plugin.core.commands.teleport.TeleportCommand;
 import com.matthew.plugin.core.commands.vanish.commands.VanishCommand;
+import com.matthew.plugin.core.commands.vanish.events.NonVanishedPlayerJoinEvent;
+import com.matthew.plugin.core.commands.vanish.events.VanishedPlayerJoinEvent;
+import com.matthew.plugin.core.commands.vanish.events.VanishedPlayerQuitEvent;
 import com.matthew.plugin.core.events.OutOfBoundsListener;
 import com.matthew.plugin.core.events.PlayerChatListener;
 import com.matthew.plugin.core.events.PlayerJoinLeaveListener;
@@ -83,6 +86,9 @@ public final class ServerCore extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new PlayerJoinLeaveListener(), this);
         Bukkit.getPluginManager().registerEvents(new ServerListPingListener(), this);
         Bukkit.getPluginManager().registerEvents(new OutOfBoundsListener(), this);
+        Bukkit.getPluginManager().registerEvents(new VanishedPlayerJoinEvent(), this);
+        Bukkit.getPluginManager().registerEvents(new NonVanishedPlayerJoinEvent(), this);
+        Bukkit.getPluginManager().registerEvents(new VanishedPlayerQuitEvent(), this);
     }
 
     public void runConstructors() {
