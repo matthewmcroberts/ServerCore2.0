@@ -20,22 +20,23 @@ public class VanishCommand implements CommandExecutor {
         Player player = (Player) sender;
 
         try {
-            if (RankUtils.isJrMod(player)) {
-                if (args.length == 0) {
-                    if (VanishManager.getIfVanished(player) == true) {
-                        VanishManager.setVanished(player, false);
-                        VanishManager.showToPlayers(player);
+            if(sender instanceof Player) {
+                if (RankUtils.isJrMod(player)) {
+                    if (args.length == 0) {
+                        if (VanishManager.getIfVanished(player) == true) {
+                            VanishManager.setVanished(player, false);
+                            VanishManager.showToPlayers(player);
+                        } else {
+                            VanishManager.hideFromPlayers(player);
+                        }
                     } else {
-                        VanishManager.hideFromPlayers(player);
+                        MessageUtils.incorrectUsage(player, "/vanish");
                     }
+
                 } else {
-                    MessageUtils.incorrectUsage(player, "/vanish");
+                    MessageUtils.jrModRank(player);
                 }
-
-            } else {
-                MessageUtils.jrModRank(player);
             }
-
         } catch (SQLException e) {
             e.printStackTrace();
         }

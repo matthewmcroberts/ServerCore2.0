@@ -1,7 +1,6 @@
 package com.matthew.plugin.core.commands.gamemode.command;
 
 import com.matthew.plugin.core.commands.gamemode.api.GamemodeManager;
-import com.matthew.plugin.core.ranks.apis.RankManager;
 import com.matthew.plugin.core.utils.MessageUtils;
 import com.matthew.plugin.core.utils.RankUtils;
 import net.md_5.bungee.api.ChatColor;

@@ -21,41 +21,44 @@ public class MessageCommand implements CommandExecutor {
         Player player = (Player) sender;
 
         try {
-            if (RankUtils.isMember(player)) {
-                if (args.length >= 2) {
-                    Player target = Bukkit.getPlayerExact(args[0]);
-                    if (Bukkit.getPlayerExact(args[0]) != null && !VanishManager.getIfVanished(target)) {
+            if (sender instanceof Player) {
+                if (RankUtils.isMember(player)) {
+                    if (args.length >= 2) {
+                        Player target = Bukkit.getPlayerExact(args[0]);
+                        if (Bukkit.getPlayerExact(args[0]) != null && !VanishManager.getIfVanished(target)) {
 
                             //if (!main.getMessageManager().pmToggle.contains(target.getUniqueId())) {
 
-                                StringBuilder message = new StringBuilder();
-                                for (int i = 1; i < args.length; i++) {
-                                    message.append(args[i]).append(" ");
-                                }
+                            StringBuilder message = new StringBuilder();
+                            for (int i = 1; i < args.length; i++) {
+                                message.append(args[i]).append(" ");
+                            }
 
-                                player.sendMessage(ChatColor.BLUE + player.getName() + " > " + target.getName() + ChatColor.GRAY + " " + message.toString());
-                                target.sendMessage(ChatColor.BLUE + player.getName() + " > " + target.getName() + ChatColor.GRAY + " " + message.toString());
-                                target.playSound(target.getLocation(), Sound.SUCCESSFUL_HIT, 1.0F, 1F);
+                            player.sendMessage(ChatColor.BLUE + player.getName() + " > " + target.getName() + ChatColor.GRAY + " " + message.toString());
+                            target.sendMessage(ChatColor.BLUE + player.getName() + " > " + target.getName() + ChatColor.GRAY + " " + message.toString());
+                            target.playSound(target.getLocation(), Sound.SUCCESSFUL_HIT, 1.0F, 1F);
 
-                                if (ServerCore.recentlyMessaged.containsKey(player)) {
-                                    ServerCore.recentlyMessaged.remove(player);
-                                }
+                            if (ServerCore.recentlyMessaged.containsKey(player)) {
+                                ServerCore.recentlyMessaged.remove(player);
+                            }
 
-                                ServerCore.recentlyMessaged.put(player, target);
+                            ServerCore.recentlyMessaged.put(player, target);
 
                             //} else {
-                                //player.sendMessage(ChatColor.BLUE + ">> " + ChatColor.GOLD + target.getName() + ChatColor.GOLD + "'s" + ChatColor.GRAY + " messages are disabled.");
+                            //player.sendMessage(ChatColor.BLUE + ">> " + ChatColor.GOLD + target.getName() + ChatColor.GOLD + "'s" + ChatColor.GRAY + " messages are disabled.");
                             //}
 
+                        } else {
+                            MessageUtils.playerNotFound(player);
+                        }
                     } else {
-                        MessageUtils.playerNotFound(player);
+                        MessageUtils.incorrectUsage(player, "/message (player) (message)");
                     }
+
                 } else {
-                    MessageUtils.incorrectUsage(player, "/message (player) (message)");
+                    MessageUtils.sendCustomMessage(player, "You must have" + ChatColor.DARK_GRAY + " " +
+                            ChatColor.BOLD + "MEMBER " + ChatColor.GRAY + "rank or higher to use this command.");
                 }
-            } else {
-                MessageUtils.sendCustomMessage(player, "You must have" + ChatColor.DARK_GRAY + " " +
-                        ChatColor.BOLD + "MEMBER " + ChatColor.GRAY + "rank or higher to use this command.");
             }
 
         } catch (SQLException e) {

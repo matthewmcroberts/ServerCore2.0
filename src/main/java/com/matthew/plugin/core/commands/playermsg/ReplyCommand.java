@@ -20,39 +20,40 @@ public class ReplyCommand implements CommandExecutor {
         Player player = (Player) sender;
 
         try {
-            if (RankUtils.isMember(player)) {
-                if (args.length > 0) {
-                    if (ServerCore.recentlyMessaged.containsKey(player)) {
-                        if (ServerCore.recentlyMessaged.get(player).getPlayer().isOnline()) {
-                            Player target = ServerCore.recentlyMessaged.get(player);
-                            //if (Main.getVanishManager().getVanishedState(target) != true) {
+            if(sender instanceof Player) {
+                if (RankUtils.isMember(player)) {
+                    if (args.length > 0) {
+                        if (ServerCore.recentlyMessaged.containsKey(player)) {
+                            if (ServerCore.recentlyMessaged.get(player).getPlayer().isOnline()) {
+                                Player target = ServerCore.recentlyMessaged.get(player);
+                                //if (Main.getVanishManager().getVanishedState(target) != true) {
 
-                            StringBuilder message = new StringBuilder();
-                            for (int i = 0; i < args.length; i++) {
-                                message.append(args[i]).append(" ");
+                                StringBuilder message = new StringBuilder();
+                                for (int i = 0; i < args.length; i++) {
+                                    message.append(args[i]).append(" ");
+                                }
+
+                                player.sendMessage(ChatColor.BLUE + player.getName() + " > " + target.getName() + ChatColor.GRAY + " " + message.toString());
+                                target.sendMessage(ChatColor.BLUE + player.getName() + " > " + target.getName() + ChatColor.GRAY + " " + message.toString());
+                                target.playSound(target.getLocation(), Sound.SUCCESSFUL_HIT, 1.0F, 1F);
+
+
+                                //} else {
+                                //player.sendMessage(ChatColor.BLUE + ">> " + ChatColor.GRAY + "The player has logged out.");
+                                //}
+                            } else {
+                                player.sendMessage(ChatColor.BLUE + ">> " + ChatColor.GRAY + "The player has logged out.");
                             }
-
-                            player.sendMessage(ChatColor.BLUE + player.getName() + " > " + target.getName() + ChatColor.GRAY + " " + message.toString());
-                            target.sendMessage(ChatColor.BLUE + player.getName() + " > " + target.getName() + ChatColor.GRAY + " " + message.toString());
-                            target.playSound(target.getLocation(), Sound.SUCCESSFUL_HIT, 1.0F, 1F);
-
-
-                            //} else {
-                            //player.sendMessage(ChatColor.BLUE + ">> " + ChatColor.GRAY + "The player has logged out.");
-                            //}
                         } else {
-                            player.sendMessage(ChatColor.BLUE + ">> " + ChatColor.GRAY + "The player has logged out.");
+                            player.sendMessage(ChatColor.BLUE + ">> " + ChatColor.GRAY + "You have not messaged anyone recently.");
                         }
                     } else {
-                        player.sendMessage(ChatColor.BLUE + ">> " + ChatColor.GRAY + "You have not messaged anyone recently.");
+                        MessageUtils.incorrectUsage(player, "/reply (message)");
                     }
                 } else {
-                    MessageUtils.incorrectUsage(player, "/reply (message)");
+                    player.sendMessage(ChatColor.BLUE + ">> " + ChatColor.GRAY + "You must have" + ChatColor.DARK_GRAY + " " + ChatColor.BOLD + "MEMBER " + ChatColor.GRAY + "rank or higher to use this command.");
                 }
-            } else {
-                player.sendMessage(ChatColor.BLUE + ">> " + ChatColor.GRAY + "You must have" + ChatColor.DARK_GRAY + " " + ChatColor.BOLD + "MEMBER " + ChatColor.GRAY + "rank or higher to use this command.");
             }
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
