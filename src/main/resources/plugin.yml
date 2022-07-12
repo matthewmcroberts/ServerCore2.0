@@ -16,3 +16,5 @@ commands:
     aliases: [msg]
   reply:
     aliases: [r]
+  tp:
+    aliases: [teleport]

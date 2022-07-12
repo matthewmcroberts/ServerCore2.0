@@ -8,6 +8,7 @@ import com.matthew.plugin.core.commands.gamemode.events.GamemodeListener;
 import com.matthew.plugin.core.commands.playermsg.commands.MessageCommand;
 import com.matthew.plugin.core.commands.playermsg.commands.ReplyCommand;
 import com.matthew.plugin.core.commands.playermsg.events.MessagesListener;
+import com.matthew.plugin.core.commands.teleport.TeleportCommand;
 import com.matthew.plugin.core.events.OutOfBoundsListener;
 import com.matthew.plugin.core.events.PlayerChatListener;
 import com.matthew.plugin.core.events.PlayerJoinLeaveListener;
@@ -67,6 +68,7 @@ public final class ServerCore extends JavaPlugin {
         getCommand("ma").setExecutor(new AdminHelpReplyCommand());
         getCommand("message").setExecutor(new MessageCommand());
         getCommand("reply").setExecutor(new ReplyCommand());
+        getCommand("tp").setExecutor(new TeleportCommand());
     }
 
     public void registerListeners() {
