@@ -11,6 +11,8 @@ import com.matthew.plugin.core.commands.inventory.commands.InventoryCommand;
 import com.matthew.plugin.core.commands.inventory.events.InventoryListener;
 import com.matthew.plugin.core.commands.playermsg.MessageCommand;
 import com.matthew.plugin.core.commands.playermsg.ReplyCommand;
+import com.matthew.plugin.core.commands.silence.commands.SilenceCommand;
+import com.matthew.plugin.core.commands.silence.events.SilenceListener;
 import com.matthew.plugin.core.commands.teleport.TeleportCommand;
 import com.matthew.plugin.core.commands.vanish.commands.VanishCommand;
 import com.matthew.plugin.core.commands.vanish.events.NonVanishedPlayerJoinEvent;
@@ -84,6 +86,7 @@ public final class ServerCore extends JavaPlugin {
         getCommand("give").setExecutor(new GiveCommand());
         getCommand("effect").setExecutor(new EffectCommand());
         getCommand("inventory").setExecutor(new InventoryCommand());
+        getCommand("silence").setExecutor(new SilenceCommand());
 
     }
 
@@ -98,6 +101,7 @@ public final class ServerCore extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new NonVanishedPlayerJoinEvent(), this);
         Bukkit.getPluginManager().registerEvents(new VanishedPlayerQuitEvent(), this);
         Bukkit.getPluginManager().registerEvents(new InventoryListener(), this);
+        Bukkit.getPluginManager().registerEvents(new SilenceListener(), this);
     }
 
     public void runConstructors() {

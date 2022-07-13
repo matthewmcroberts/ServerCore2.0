@@ -24,3 +24,4 @@ commands:
   effect:
   inventory:
     aliases: [inv]
+  silence:
