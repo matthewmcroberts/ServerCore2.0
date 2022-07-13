@@ -22,7 +22,7 @@ public class GiveCommand implements CommandExecutor {
         Player player = (Player) sender;
 
         try {
-            if (RankUtils.isAdmin(player)) {
+            if (RankUtils.isSrMod(player)) {
                 if(!args[0].equalsIgnoreCase("usage")) {
                     if (args.length == 3) {
                         if (!Utils.isNumeric(args[1])) {
@@ -62,7 +62,7 @@ public class GiveCommand implements CommandExecutor {
                     MessageUtils.addToList(player, "/give all (item) (amount)");
                 }
             } else {
-                MessageUtils.adminRank(player);
+                MessageUtils.srModRank(player);
             }
         } catch (SQLException e) {
             e.printStackTrace();

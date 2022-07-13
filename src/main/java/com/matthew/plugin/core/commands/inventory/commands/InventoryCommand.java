@@ -24,7 +24,7 @@ public class InventoryCommand implements CommandExecutor {
             if (sender instanceof Player) {
                 Player player = (Player) sender;
 
-                if (RankUtils.isAdmin(player)) {
+                if (RankUtils.isMod(player)) {
                     if (args.length == 2) {
                         switch (args[0]) {
                             case "clear":
@@ -69,7 +69,7 @@ public class InventoryCommand implements CommandExecutor {
                         MessageUtils.addToList(player, "/inventory clear");
                     }
                 } else {
-                    MessageUtils.adminRank(player);
+                    MessageUtils.modRank(player);
                 }
             }
         } catch (SQLException e) {

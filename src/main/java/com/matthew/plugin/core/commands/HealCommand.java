@@ -19,7 +19,7 @@ public class HealCommand implements CommandExecutor {
         Player player = (Player) sender;
 
         try {
-            if (RankUtils.isAdmin(player)) {
+            if (RankUtils.isMod(player)) {
                 if (sender instanceof Player)
                     if (args.length == 1) {
                         if(!args[0].equalsIgnoreCase("usage")) {
@@ -65,7 +65,7 @@ public class HealCommand implements CommandExecutor {
                         MessageUtils.addToList(player, "/heal (player)");
                     }
             } else {
-                MessageUtils.adminRank(player);
+                MessageUtils.modRank(player);
             }
         } catch (SQLException e) {
             e.printStackTrace();
