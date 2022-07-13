@@ -22,3 +22,5 @@ commands:
     aliases: [v]
   give:
   effect:
+  inventory:
+    aliases: [inv]

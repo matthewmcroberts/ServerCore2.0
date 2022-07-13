@@ -7,6 +7,8 @@ import com.matthew.plugin.core.commands.adminhelp.AdminHelpCommand;
 import com.matthew.plugin.core.commands.adminhelp.AdminHelpReplyCommand;
 import com.matthew.plugin.core.commands.gamemode.command.GamemodeCommand;
 import com.matthew.plugin.core.commands.gamemode.events.GamemodeListener;
+import com.matthew.plugin.core.commands.inventory.commands.InventoryCommand;
+import com.matthew.plugin.core.commands.inventory.events.InventoryListener;
 import com.matthew.plugin.core.commands.playermsg.MessageCommand;
 import com.matthew.plugin.core.commands.playermsg.ReplyCommand;
 import com.matthew.plugin.core.commands.teleport.TeleportCommand;
@@ -81,6 +83,8 @@ public final class ServerCore extends JavaPlugin {
         getCommand("vanish").setExecutor(new VanishCommand());
         getCommand("give").setExecutor(new GiveCommand());
         getCommand("effect").setExecutor(new EffectCommand());
+        getCommand("inventory").setExecutor(new InventoryCommand());
+
     }
 
     public void registerListeners() {
@@ -93,6 +97,7 @@ public final class ServerCore extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new VanishedPlayerJoinEvent(), this);
         Bukkit.getPluginManager().registerEvents(new NonVanishedPlayerJoinEvent(), this);
         Bukkit.getPluginManager().registerEvents(new VanishedPlayerQuitEvent(), this);
+        Bukkit.getPluginManager().registerEvents(new InventoryListener(), this);
     }
 
     public void runConstructors() {
