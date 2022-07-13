@@ -31,6 +31,12 @@ public class EffectCommand implements CommandExecutor {
                         drawCircle(player.getLocation(), 1f);
                         break;
 
+                    case "usage":
+                        MessageUtils.commandUsage(player, "Effect");
+                        MessageUtils.addToList(player, "/effect (effect_type)");
+                        MessageUtils.addToList(player, ChatColor.GRAY + "Effect Types: " + ChatColor.YELLOW + "circle, tornado");
+                        break;
+
                     default:
                         MessageUtils.sendCustomMessage(player, "Unknown effect");
                         player.sendMessage(ChatColor.BLUE + "   -" + ChatColor.GRAY + " Effect Types: " + ChatColor.YELLOW + "circle, tornado");

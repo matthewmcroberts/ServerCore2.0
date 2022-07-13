@@ -22,26 +22,33 @@ public class HealCommand implements CommandExecutor {
             if (RankUtils.isAdmin(player)) {
                 if (sender instanceof Player)
                     if (args.length == 1) {
-                        if (Bukkit.getPlayerExact(args[0]) != null) {
-                            if (Bukkit.getPlayerExact(args[0]).getGameMode() != GameMode.CREATIVE) {
-                                Player target = Bukkit.getPlayerExact(args[0]);
-                                target.setHealth(20.0);
-                                target.setFoodLevel(20);
-                                if(target != player) {
-                                    player.sendMessage(ChatColor.BLUE + ">> " + ChatColor.GOLD + target.getName() + ChatColor.GRAY + " has been" +
-                                            ChatColor.GREEN + " healed.");
-                                    target.sendMessage(ChatColor.BLUE + ">> " + ChatColor.GRAY + "You have been" +
-                                            ChatColor.GREEN + " healed.");
+                        if(!args[0].equalsIgnoreCase("usage")) {
+                            if (Bukkit.getPlayerExact(args[0]) != null) {
+                                if (Bukkit.getPlayerExact(args[0]).getGameMode() != GameMode.CREATIVE) {
+                                    Player target = Bukkit.getPlayerExact(args[0]);
+                                    target.setHealth(20.0);
+                                    target.setFoodLevel(20);
+                                    if (target != player) {
+                                        player.sendMessage(ChatColor.BLUE + ">> " + ChatColor.GOLD + target.getName() + ChatColor.GRAY + " has been" +
+                                                ChatColor.GREEN + " healed.");
+                                        target.sendMessage(ChatColor.BLUE + ">> " + ChatColor.GRAY + "You have been" +
+                                                ChatColor.GREEN + " healed.");
+                                    } else {
+                                        player.sendMessage(ChatColor.BLUE + ">> " + ChatColor.GOLD + target.getName() + ChatColor.GRAY + " has been" +
+                                                ChatColor.GREEN + " healed.");
+                                    }
                                 } else {
-                                    player.sendMessage(ChatColor.BLUE + ">> " + ChatColor.GOLD + target.getName() + ChatColor.GRAY + " has been" +
-                                            ChatColor.GREEN + " healed.");
+                                    player.sendMessage(ChatColor.BLUE + ">> " + ChatColor.GRAY + "You cannot heal a player in" + ChatColor.GOLD +
+                                            " creative");
                                 }
                             } else {
-                                player.sendMessage(ChatColor.BLUE + ">> " + ChatColor.GRAY + "You cannot heal a player in" + ChatColor.GOLD +
-                                        " creative");
+                                MessageUtils.playerNotFound(player);
                             }
                         } else {
-                            MessageUtils.playerNotFound(player);
+                            MessageUtils.commandUsage(player, "Heal");
+                            MessageUtils.addToList(player, "/heal");
+                            MessageUtils.addToList(player, "/heal (player)");
+
                         }
                     } else if (args.length == 0) {
                         if (player.getGameMode() != GameMode.CREATIVE) {
@@ -55,7 +62,7 @@ public class HealCommand implements CommandExecutor {
                         }
                     } else if (args.length > 1) {
                         MessageUtils.incorrectUsage(player, "/heal");
-                        player.sendMessage(ChatColor.BLUE + "    - " + ChatColor.GOLD + "/heal (player)");
+                        MessageUtils.addToList(player, "/heal (player)");
                     }
             } else {
                 MessageUtils.adminRank(player);

@@ -33,4 +33,12 @@ public class MessageUtils {
         player.sendMessage(ChatColor.BLUE + ">> " + ChatColor.GRAY + message);
     }
 
+    public static void commandUsage(Player player, String command) {
+        player.sendMessage(ChatColor.BLUE + ">> " + ChatColor.GRAY + command + " command usage:");
+    }
+
+    public static void addToList(Player player, String message) {
+        player.sendMessage(ChatColor.BLUE + "    - " + ChatColor.GOLD + message);
+    }
+
 }

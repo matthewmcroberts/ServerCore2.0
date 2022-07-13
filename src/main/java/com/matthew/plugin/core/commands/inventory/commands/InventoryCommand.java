@@ -21,7 +21,7 @@ public class InventoryCommand implements CommandExecutor {
 
 
         try {
-            if(sender instanceof Player) {
+            if (sender instanceof Player) {
                 Player player = (Player) sender;
 
                 if (RankUtils.isAdmin(player)) {
@@ -56,10 +56,17 @@ public class InventoryCommand implements CommandExecutor {
                     } else if ((args.length == 1) && args[0].equalsIgnoreCase("clear")) {
                         InventoryManager.inventoryClear(player);
 
+                    } else if ((args.length == 1) && args[0].equalsIgnoreCase("usage")) {
+                        MessageUtils.commandUsage(player, "Inventory");
+                        MessageUtils.addToList(player, "/inventory clear (player)");
+                        MessageUtils.addToList(player, "/inventory restore (player)");
+                        MessageUtils.addToList(player, "/inventory clear");
+
                     } else {
                         MessageUtils.incorrectUsage(player, "/inventory clear");
-                        player.sendMessage(ChatColor.BLUE + "    - " + ChatColor.GOLD + "/inventory clear (player)");
-                        player.sendMessage(ChatColor.BLUE + "    - " + ChatColor.GOLD + "/inventory restore (player)");
+                        MessageUtils.addToList(player, "/inventory clear (player)");
+                        MessageUtils.addToList(player, "/inventory restore (player)");
+                        MessageUtils.addToList(player, "/inventory clear");
                     }
                 } else {
                     MessageUtils.adminRank(player);

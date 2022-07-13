@@ -3,8 +3,8 @@ package com.matthew.plugin.core.commands.gamemode.command;
 import com.matthew.plugin.core.commands.gamemode.api.GamemodeManager;
 import com.matthew.plugin.core.utils.MessageUtils;
 import com.matthew.plugin.core.utils.RankUtils;
-import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -28,19 +28,24 @@ public class GamemodeCommand implements CommandExecutor {
                             GamemodeManager.giveGamemode(player);
                         }
                 } else if (args.length == 1) {
-                    Player target = Bukkit.getPlayerExact(args[0]);
-                    if (target != null) {
-                        if (target.getGameMode() == GameMode.CREATIVE) {
-                            GamemodeManager.removeGamemode(player, target);
+                    if(!args[0].equalsIgnoreCase("usage")) {
+                        Player target = Bukkit.getPlayerExact(args[0]);
+                        if (target != null) {
+                            if (target.getGameMode() == GameMode.CREATIVE) {
+                                GamemodeManager.removeGamemode(player, target);
+                            } else {
+                                GamemodeManager.giveGamemode(player, target);
+                            }
                         } else {
-                            GamemodeManager.giveGamemode(player, target);
+                            MessageUtils.playerNotFound(player);
                         }
                     } else {
-                        MessageUtils.playerNotFound(player);
+                        MessageUtils.commandUsage(player, "GameMode");
+                        MessageUtils.addToList(player, "/gm (player)");
                     }
                 } else {
                     MessageUtils.incorrectUsage(player, "/gm");
-                    player.sendMessage(ChatColor.BLUE + "    - " + ChatColor.GOLD + "/gm (player)");
+                    MessageUtils.addToList(player, "/gm (player)");
                 }
             } else {
                 MessageUtils.adminRank(player);

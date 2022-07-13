@@ -23,37 +23,43 @@ public class GiveCommand implements CommandExecutor {
 
         try {
             if (RankUtils.isAdmin(player)) {
-                if (args.length == 3) {
-                    if(!Utils.isNumeric(args[1])) {
-                        Material itemType = Material.matchMaterial(args[1]);
-                        if (args[0].equalsIgnoreCase("all")) {
-                            if (itemType != null) {
-                                for (Player all : Bukkit.getOnlinePlayers()) {
-                                    giveAll(player, all, itemType, Integer.parseInt(args[2]));
-                                }
-                            } else {
-                                MessageUtils.sendCustomMessage(player, ChatColor.GOLD + args[1] + ChatColor.GRAY + " does not exist.");
-                            }
-                        } else {
-                            Player target = Bukkit.getPlayerExact(args[0]);
-                            if (target != null) {
-                                Material itemType2 = Material.matchMaterial(args[1]);
-                                if (itemType2 != null) {
-                                    give(player, target, itemType2, Integer.parseInt(args[2]));
+                if(!args[0].equalsIgnoreCase("usage")) {
+                    if (args.length == 3) {
+                        if (!Utils.isNumeric(args[1])) {
+                            Material itemType = Material.matchMaterial(args[1]);
+                            if (args[0].equalsIgnoreCase("all")) {
+                                if (itemType != null) {
+                                    for (Player all : Bukkit.getOnlinePlayers()) {
+                                        giveAll(player, all, itemType, Integer.parseInt(args[2]));
+                                    }
                                 } else {
                                     MessageUtils.sendCustomMessage(player, ChatColor.GOLD + args[1] + ChatColor.GRAY + " does not exist.");
-
                                 }
                             } else {
-                                MessageUtils.playerNotFound(player);
+                                Player target = Bukkit.getPlayerExact(args[0]);
+                                if (target != null) {
+                                    Material itemType2 = Material.matchMaterial(args[1]);
+                                    if (itemType2 != null) {
+                                        give(player, target, itemType2, Integer.parseInt(args[2]));
+                                    } else {
+                                        MessageUtils.sendCustomMessage(player, ChatColor.GOLD + args[1] + ChatColor.GRAY + " does not exist.");
+
+                                    }
+                                } else {
+                                    MessageUtils.playerNotFound(player);
+                                }
                             }
+                        } else {
+                            MessageUtils.sendCustomMessage(player, ChatColor.GOLD + args[1] + ChatColor.GRAY + " does not exist.");
                         }
                     } else {
-                        MessageUtils.sendCustomMessage(player, ChatColor.GOLD + args[1] + ChatColor.GRAY + " does not exist.");
+                        MessageUtils.incorrectUsage(player, "/give (player) (item) (amount)");
+                        MessageUtils.addToList(player, "/give all (item) (amount)");
                     }
                 } else {
-                    MessageUtils.incorrectUsage(player, "/give (player) (item) (amount)");
-                    player.sendMessage(ChatColor.BLUE + "    - " + ChatColor.GOLD + "/give all (item) (amount)");
+                    MessageUtils.commandUsage(player, "Give item");
+                    MessageUtils.addToList(player, "/give (player) (item) (amount)");
+                    MessageUtils.addToList(player, "/give all (item) (amount)");
                 }
             } else {
                 MessageUtils.adminRank(player);

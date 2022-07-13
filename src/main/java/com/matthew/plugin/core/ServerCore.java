@@ -7,6 +7,7 @@ import com.matthew.plugin.core.commands.adminhelp.AdminHelpCommand;
 import com.matthew.plugin.core.commands.adminhelp.AdminHelpReplyCommand;
 import com.matthew.plugin.core.commands.gamemode.command.GamemodeCommand;
 import com.matthew.plugin.core.commands.gamemode.events.GamemodeListener;
+import com.matthew.plugin.core.commands.help.HelpCommand;
 import com.matthew.plugin.core.commands.inventory.commands.InventoryCommand;
 import com.matthew.plugin.core.commands.inventory.events.InventoryListener;
 import com.matthew.plugin.core.commands.playermsg.MessageCommand;
@@ -87,6 +88,7 @@ public final class ServerCore extends JavaPlugin {
         getCommand("effect").setExecutor(new EffectCommand());
         getCommand("inventory").setExecutor(new InventoryCommand());
         getCommand("silence").setExecutor(new SilenceCommand());
+        getCommand("help").setExecutor(new HelpCommand());
 
     }
 

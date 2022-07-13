@@ -34,6 +34,9 @@ public class SilenceCommand implements CommandExecutor {
                                 MessageUtils.sendCustomMessage(target, "Chat has been " + ChatColor.RED + "silenced.");
                             }
                         }
+                    } else if (args[0].equalsIgnoreCase("usage")) {
+                        MessageUtils.commandUsage(player, "Silence");
+                        MessageUtils.addToList(player, "/silence");
                     } else {
                         MessageUtils.incorrectUsage(player, "/silence");
                     }
