@@ -22,23 +22,28 @@ public class AdminHelpCommand implements CommandExecutor {
 
         if (sender instanceof Player) {
             if (args.length >= 1) {
-                for (Player target : Bukkit.getOnlinePlayers()) {
-                    try {
-                        StringBuilder message = new StringBuilder();
-                        for (int i = 0; i < args.length; i++) {
-                            message.append(args[i]).append(" ");
-                        }
+                if(!args[0].equalsIgnoreCase("usage")) {
+                    for (Player target : Bukkit.getOnlinePlayers()) {
+                        try {
+                            StringBuilder message = new StringBuilder();
+                            for (int i = 0; i < args.length; i++) {
+                                message.append(args[i]).append(" ");
+                            }
 
-                        if (target.equals(player)) {
-                            player.sendMessage(RankManager.getRank(player).getColor() + "[" + RankManager.getRank(player).getName() + "] " + player.getName() + " " + ChatColor.GOLD + message);
-                            player.playSound(player.getLocation(), Sound.NOTE_PIANO, 1.0F, 1F);
-                        } else if (RankUtils.isJrMod(target)) {
-                            target.sendMessage(RankManager.getRank(player).getColor() + "[" + RankManager.getRank(player).getName() + "] " + player.getName() + " " + ChatColor.GOLD + message);
-                            target.playSound(target.getLocation(), Sound.NOTE_PIANO, 1.0F, 1F);
+                            if (target.equals(player)) {
+                                player.sendMessage(RankManager.getRank(player).getColor() + "[" + RankManager.getRank(player).getName() + "] " + player.getName() + " " + ChatColor.GOLD + message);
+                                player.playSound(player.getLocation(), Sound.NOTE_PIANO, 1.0F, 1F);
+                            } else if (RankUtils.isJrMod(target)) {
+                                target.sendMessage(RankManager.getRank(player).getColor() + "[" + RankManager.getRank(player).getName() + "] " + player.getName() + " " + ChatColor.GOLD + message);
+                                target.playSound(target.getLocation(), Sound.NOTE_PIANO, 1.0F, 1F);
+                            }
+                        } catch (SQLException e) {
+                            e.printStackTrace();
                         }
-                    } catch (SQLException e) {
-                        e.printStackTrace();
                     }
+                } else {
+                    MessageUtils.commandUsage(player, "Admin Help");
+                    MessageUtils.addToList(player, "/a (message)");
                 }
             } else {
                 MessageUtils.incorrectUsage(player, "/a (message)");

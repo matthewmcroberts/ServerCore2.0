@@ -31,7 +31,7 @@ public class AdminHelpReplyCommand implements CommandExecutor {
                         for (int i = 1; i < args.length; i++) {
                             message.append(args[i]).append(" ");
                         }
-                        if(target != null) {
+                        if (target != null) {
                             player.sendMessage(ChatColor.BOLD + ChatColor.RED.toString() + ChatColor.DARK_PURPLE + "-> "
                                     + RankManager.getRank(target).getColor() + "[" + RankManager.getRank(target).getName() + "] " + target.getName() + ChatColor.GOLD + " " + message);
                             player.playSound(player.getLocation(), Sound.NOTE_PIANO, 1.0F, 1F);
@@ -42,6 +42,9 @@ public class AdminHelpReplyCommand implements CommandExecutor {
                         } else {
                             MessageUtils.playerNotFound(player);
                         }
+                    } else if (args[0].equalsIgnoreCase("usage")) {
+                            MessageUtils.commandUsage(player, "Admin Help Reply");
+                            MessageUtils.addToList(player, "/ma (message)");
                     } else {
                         MessageUtils.incorrectUsage(player, "/ma (message)");
                     }

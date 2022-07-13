@@ -49,6 +49,10 @@ public class RankCommand implements CommandExecutor {
                     } else {
                         MessageUtils.sendCustomMessage(player, ChatColor.YELLOW + "0" + ChatColor.GRAY + " matches for player in database.");
                     }
+                } else if(args.length == 1 && args[0].equalsIgnoreCase("usage")){
+                    MessageUtils.commandUsage(player, "Set rank");
+                    MessageUtils.addToList(player, "/setrank (player) (rank_name)");
+
                 } else {
                     MessageUtils.incorrectUsage(player, "/setrank (player) (rank_name)");
                 }
