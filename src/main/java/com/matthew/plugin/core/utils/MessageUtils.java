@@ -1,7 +1,10 @@
 package com.matthew.plugin.core.utils;
 
+import com.matthew.plugin.core.ranks.apis.RankManager;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
+
+import java.sql.SQLException;
 
 public class MessageUtils {
 
@@ -39,6 +42,15 @@ public class MessageUtils {
 
     public static void addToList(Player player, String message) {
         player.sendMessage(ChatColor.BLUE + "    - " + ChatColor.GOLD + message);
+    }
+
+    public static void helpMessageHeader(Player player) throws SQLException {
+        player.sendMessage(ChatColor.BLUE + ">> " + ChatColor.GRAY + " List of permissions for " + RankManager.getRank(player).getColor().toString() + ChatColor.BOLD + RankManager.getRank(player).getName() + ChatColor.GRAY + " rank:");
+        player.sendMessage(ChatColor.BLUE + "    - " + ChatColor.GRAY + ChatColor.BOLD + "Note: " + ChatColor.GRAY + "click on the permission to view the usage");
+    }
+
+    public static void helpMessageFooter(Player player) {
+        player.sendMessage(ChatColor.BLUE + "> " + ChatColor.GRAY + "For additional help feel free to message a staff member!");
     }
 
 }
