@@ -25,6 +25,7 @@ public class HelpCommand implements CommandExecutor {
                         case "OWNER":
                         case "DEV":
                         case "ADMIN":
+                        case "QAT":
                             HelpUtils.adminHelp(player);
                             break;
 

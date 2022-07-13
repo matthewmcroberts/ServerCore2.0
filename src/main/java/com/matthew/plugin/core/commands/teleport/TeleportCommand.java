@@ -21,7 +21,7 @@ public class TeleportCommand implements CommandExecutor {
 
         try {
             if(sender instanceof Player) {
-                if (RankUtils.isMod(player)) {
+                if (RankUtils.isJrMod(player)) {
                     if(!args[0].equalsIgnoreCase("usage")) {
                         if (!(args.length > 2)) {
                             if (args.length == 1) {
@@ -56,7 +56,7 @@ public class TeleportCommand implements CommandExecutor {
                         MessageUtils.addToList(player, ChatColor.DARK_RED + "/tp all");
                     }
                 } else {
-                    MessageUtils.modRank(player);
+                    MessageUtils.jrModRank(player);
                 }
             }
         } catch (SQLException e) {

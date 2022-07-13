@@ -200,21 +200,10 @@ public class HelpUtils {
         reply.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/reply usage"));
         player.spigot().sendMessage(reply);
 
-        TextComponent teleport = new TextComponent("        §9- §eTeleport");
-        teleport.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/tp usage"));
-        player.spigot().sendMessage(teleport);
-
-        TextComponent vanish = new TextComponent("        §9- §eVanish");
-        vanish.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/v usage"));
-        player.spigot().sendMessage(vanish);
-
         TextComponent adminHelp = new TextComponent("        §9- §eAdmin Help");
         adminHelp.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/a usage"));
         player.spigot().sendMessage(adminHelp);
 
-        TextComponent adminHelpReply = new TextComponent("        §9- §eAdmin Help Reply");
-        adminHelpReply.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/ma usage"));
-        player.spigot().sendMessage(adminHelpReply);
 
         MessageUtils.helpMessageFooter(player);
     }
