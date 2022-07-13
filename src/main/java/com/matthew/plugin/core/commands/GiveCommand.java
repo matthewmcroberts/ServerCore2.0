@@ -23,7 +23,6 @@ public class GiveCommand implements CommandExecutor {
 
         try {
             if (RankUtils.isSrMod(player)) {
-                if(!args[0].equalsIgnoreCase("usage")) {
                     if (args.length == 3) {
                         if (!Utils.isNumeric(args[1])) {
                             Material itemType = Material.matchMaterial(args[1]);
@@ -52,15 +51,14 @@ public class GiveCommand implements CommandExecutor {
                         } else {
                             MessageUtils.sendCustomMessage(player, ChatColor.GOLD + args[1] + ChatColor.GRAY + " does not exist.");
                         }
+                    } else if(args.length == 1 && args[0].equalsIgnoreCase("usage")){
+                        MessageUtils.commandUsage(player, "Give item");
+                        MessageUtils.addToList(player, "/give (player) (item) (amount)");
+                        MessageUtils.addToList(player, "/give all (item) (amount)");
                     } else {
                         MessageUtils.incorrectUsage(player, "/give (player) (item) (amount)");
                         MessageUtils.addToList(player, "/give all (item) (amount)");
                     }
-                } else {
-                    MessageUtils.commandUsage(player, "Give item");
-                    MessageUtils.addToList(player, "/give (player) (item) (amount)");
-                    MessageUtils.addToList(player, "/give all (item) (amount)");
-                }
             } else {
                 MessageUtils.srModRank(player);
             }

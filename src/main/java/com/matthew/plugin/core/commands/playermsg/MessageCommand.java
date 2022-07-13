@@ -23,7 +23,6 @@ public class MessageCommand implements CommandExecutor {
         try {
             if (sender instanceof Player) {
                 if (RankUtils.isMember(player)) {
-                    if(!args[0].equalsIgnoreCase("usage")) {
                         if (args.length >= 2) {
                             Player target = Bukkit.getPlayerExact(args[0]);
                             if (Bukkit.getPlayerExact(args[0]) != null && !VanishManager.getIfVanished(target)) {
@@ -53,13 +52,13 @@ public class MessageCommand implements CommandExecutor {
                                 MessageUtils.playerNotFound(player);
                             }
 
+                        } else if(args.length == 1 && args[0].equalsIgnoreCase("usage")){
+                            MessageUtils.commandUsage(player, "Message");
+                            MessageUtils.addToList(player, "/msg (player)");
                         } else {
                             MessageUtils.incorrectUsage(player, "/message (player) (message)");
                         }
-                    } else {
-                        MessageUtils.commandUsage(player, "Message");
-                        MessageUtils.addToList(player, "/message (player) (message)");
-                    }
+
                 } else {
                     MessageUtils.sendCustomMessage(player, "You must have" + ChatColor.DARK_GRAY + " " +
                             ChatColor.BOLD + "MEMBER " + ChatColor.GRAY + "rank or higher to use this command.");

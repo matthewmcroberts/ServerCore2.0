@@ -66,7 +66,6 @@ public class InventoryCommand implements CommandExecutor {
                         MessageUtils.incorrectUsage(player, "/inventory clear");
                         MessageUtils.addToList(player, "/inventory clear (player)");
                         MessageUtils.addToList(player, "/inventory restore (player)");
-                        MessageUtils.addToList(player, "/inventory clear");
                     }
                 } else {
                     MessageUtils.modRank(player);
