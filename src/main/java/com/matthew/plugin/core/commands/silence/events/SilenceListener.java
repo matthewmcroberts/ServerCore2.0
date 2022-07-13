@@ -32,6 +32,7 @@ public class SilenceListener implements Listener {
         if(SilenceManager.getSilenceManager().contains(player)) {
             if(RankUtils.isNotStaff(player)) {
                 MessageUtils.sendCustomMessage(player, "Shh... Chat is currently" + org.bukkit.ChatColor.RED + " silenced!");
+                e.setCancelled(true);
             }
         }
     }

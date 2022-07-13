@@ -1,7 +1,9 @@
 package com.matthew.plugin.core.events;
 
+import com.matthew.plugin.core.commands.silence.SilenceManager;
 import com.matthew.plugin.core.ranks.Ranks;
 import com.matthew.plugin.core.ranks.apis.RankManager;
+import com.matthew.plugin.core.utils.RankUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -35,8 +37,16 @@ public class PlayerChatListener implements Listener {
             }
             e.setCancelled(true);
         } else {
-            for (Player onlinePlayers : e.getRecipients()) {
-                onlinePlayers.sendMessage(rank.getColor() + ChatColor.BOLD.toString() + rank.getName() + " " + rank.getColor() + player.getName() + " " + ChatColor.WHITE + e.getMessage());
+            if(RankUtils.isNotStaff(player)) {
+                if(!SilenceManager.getSilenceManager().contains(player)) {
+                    for (Player onlinePlayers : e.getRecipients()) {
+                        onlinePlayers.sendMessage(rank.getColor() + ChatColor.BOLD.toString() + rank.getName() + " " + rank.getColor() + player.getName() + " " + ChatColor.WHITE + e.getMessage());
+                    }
+                }
+            } else {
+                for (Player onlinePlayers : e.getRecipients()) {
+                    onlinePlayers.sendMessage(rank.getColor() + ChatColor.BOLD.toString() + rank.getName() + " " + rank.getColor() + player.getName() + " " + ChatColor.WHITE + e.getMessage());
+                }
             }
             e.setCancelled(true);
         }
