@@ -26,3 +26,5 @@ commands:
     aliases: [inv]
   silence:
   help:
+  punish:
+    aliases: [p]

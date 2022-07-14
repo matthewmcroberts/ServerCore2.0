@@ -28,6 +28,8 @@ import com.matthew.plugin.core.events.disables.FallDamageListener;
 import com.matthew.plugin.core.events.disables.WeatherChangeListener;
 import com.matthew.plugin.core.nametags.NametagsManager;
 import com.matthew.plugin.core.nametags.events.NametagsListener;
+import com.matthew.plugin.core.punish.commands.PunishCommand;
+import com.matthew.plugin.core.punish.events.PunishListener;
 import com.matthew.plugin.core.ranks.commands.RankCommand;
 import com.matthew.plugin.core.ranks.events.RanksListener;
 import org.bukkit.Bukkit;
@@ -95,6 +97,7 @@ public final class ServerCore extends JavaPlugin {
         getCommand("inventory").setExecutor(new InventoryCommand());
         getCommand("silence").setExecutor(new SilenceCommand());
         getCommand("help").setExecutor(new HelpCommand());
+        getCommand("punish").setExecutor(new PunishCommand());
 
     }
 
@@ -114,6 +117,7 @@ public final class ServerCore extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new BuildingListener(), this);
         Bukkit.getPluginManager().registerEvents(new FallDamageListener(), this);
         Bukkit.getPluginManager().registerEvents(new WeatherChangeListener(), this);
+        Bukkit.getPluginManager().registerEvents(new PunishListener(), this);
 
     }
 
