@@ -23,6 +23,8 @@ import com.matthew.plugin.core.events.OutOfBoundsListener;
 import com.matthew.plugin.core.events.PlayerChatListener;
 import com.matthew.plugin.core.events.PlayerJoinLeaveListener;
 import com.matthew.plugin.core.events.ServerListPingListener;
+import com.matthew.plugin.core.nametags.NametagsManager;
+import com.matthew.plugin.core.nametags.events.NametagsListener;
 import com.matthew.plugin.core.ranks.commands.RankCommand;
 import com.matthew.plugin.core.ranks.events.RanksListener;
 import org.bukkit.Bukkit;
@@ -54,6 +56,7 @@ public final class ServerCore extends JavaPlugin {
     public void onEnable() {
 
         instance = this;
+        new NametagsManager();
 
         try {
             openConnection();
@@ -104,6 +107,7 @@ public final class ServerCore extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new VanishedPlayerQuitEvent(), this);
         Bukkit.getPluginManager().registerEvents(new InventoryListener(), this);
         Bukkit.getPluginManager().registerEvents(new SilenceListener(), this);
+        Bukkit.getPluginManager().registerEvents(new NametagsListener(), this);
     }
 
     public void runConstructors() {
@@ -130,7 +134,6 @@ public final class ServerCore extends JavaPlugin {
     public static ServerCore getInstance() {
         return instance;
     }
-
 
 
 }
