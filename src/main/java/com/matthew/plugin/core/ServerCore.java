@@ -23,6 +23,9 @@ import com.matthew.plugin.core.events.OutOfBoundsListener;
 import com.matthew.plugin.core.events.PlayerChatListener;
 import com.matthew.plugin.core.events.PlayerJoinLeaveListener;
 import com.matthew.plugin.core.events.ServerListPingListener;
+import com.matthew.plugin.core.events.disables.BuildingListener;
+import com.matthew.plugin.core.events.disables.FallDamageListener;
+import com.matthew.plugin.core.events.disables.WeatherChangeListener;
 import com.matthew.plugin.core.nametags.NametagsManager;
 import com.matthew.plugin.core.nametags.events.NametagsListener;
 import com.matthew.plugin.core.ranks.commands.RankCommand;
@@ -108,6 +111,10 @@ public final class ServerCore extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new InventoryListener(), this);
         Bukkit.getPluginManager().registerEvents(new SilenceListener(), this);
         Bukkit.getPluginManager().registerEvents(new NametagsListener(), this);
+        Bukkit.getPluginManager().registerEvents(new BuildingListener(), this);
+        Bukkit.getPluginManager().registerEvents(new FallDamageListener(), this);
+        Bukkit.getPluginManager().registerEvents(new WeatherChangeListener(), this);
+
     }
 
     public void runConstructors() {
