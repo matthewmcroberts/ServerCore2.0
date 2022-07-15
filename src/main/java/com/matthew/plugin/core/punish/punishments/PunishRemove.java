@@ -11,8 +11,8 @@ public class PunishRemove {
 
     public static void removePunishment(Player sender, OfflinePlayer t) {
 
-        if(Bukkit.getBanList(BanList.Type.NAME).isBanned(Bukkit.getOfflinePlayer(t.getName()).getName())) {
-            Bukkit.getBanList(BanList.Type.NAME).pardon(Bukkit.getOfflinePlayer(t.getName()).getName());
+        if(Bukkit.getBanList(BanList.Type.NAME).isBanned(t.getName())) {
+            Bukkit.getBanList(BanList.Type.NAME).pardon(t.getName());
             MessageUtils.sendCustomMessage(sender,"Successfully removed " + ChatColor.YELLOW + t.getName() + "'s" + ChatColor.GRAY + " punishment.");
 
         } else {

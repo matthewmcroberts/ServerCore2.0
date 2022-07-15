@@ -28,8 +28,8 @@ public class PunishCommand implements CommandExecutor {
                 if(RankUtils.isMod(player)) {
                     if(args.length >= 2) {
                         if(!args[0].equalsIgnoreCase("remove")) {
-                            if(Bukkit.getPlayerExact(args[0]) != null) {
-                                Player target = Bukkit.getPlayerExact(args[0]);
+                            if(Bukkit.getOfflinePlayer(args[0]) != null) {
+                                OfflinePlayer target = Bukkit.getOfflinePlayer(args[0]);
 
                                 StringBuilder reason = new StringBuilder();
                                 for (int i = 1; i < args.length; i++) {

@@ -3,6 +3,7 @@ package com.matthew.plugin.core.punish.ui;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemFlag;
@@ -13,7 +14,7 @@ import java.util.ArrayList;
 
 public class PunishUI {
 
-    public static void openPunishUI(Player player, Player target) {
+    public static void openPunishUI(Player player, OfflinePlayer target) {
 
         Inventory ui = Bukkit.createInventory(player, 54, ChatColor.GOLD + "Punish - " + target.getName());
 
