@@ -48,7 +48,7 @@ public class PunishCommand implements CommandExecutor {
                                 }
                             }
                         }
-                    } else if (args[0].equalsIgnoreCase("usage")) {
+                    } else if (args.length == 1 && args[0].equalsIgnoreCase("usage")) {
                         MessageUtils.commandUsage(player, "Punish");
                         MessageUtils.addToList(player, "/punish (player) (reason)");
                         MessageUtils.addToList(player, "/punish remove (player)");
