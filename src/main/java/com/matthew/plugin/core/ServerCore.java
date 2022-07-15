@@ -47,6 +47,8 @@ import java.util.HashMap;
 public final class ServerCore extends JavaPlugin {
 
     public static HashMap<Player, Player> recentlyMessaged = new HashMap<>();
+    public static HashMap<Player, String> punishReason = new HashMap<>();
+
 
     private static Connection connection;
     private final String host = "localhost";

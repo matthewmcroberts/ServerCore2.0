@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 public class PunishUI {
 
-    public static void openPunishUI(Player player, Player target, String reason) {
+    public static void openPunishUI(Player player, Player target) {
 
         Inventory ui = Bukkit.createInventory(player, 54, ChatColor.GOLD + "Punish - " + target.getName());
 
@@ -68,7 +68,7 @@ public class PunishUI {
         ui.setItem(13, gameCategory);
 
         ArrayList<String> gameSev1Lore = new ArrayList<>();
-        gameSev1Lore.add(ChatColor.GRAY + "Duration: " + ChatColor.YELLOW + "0");
+        gameSev1Lore.add(ChatColor.GRAY + "Duration: " + ChatColor.YELLOW + "1 hour");
         ItemStack gameSev1 = new ItemStack(Material.WOOL, 1, (byte) 5);
         ItemMeta gameSev1Meta = gameSev1.getItemMeta();
         gameSev1Meta.setDisplayName(ChatColor.GREEN.toString() + ChatColor.BOLD + "Severity 1");
@@ -77,7 +77,7 @@ public class PunishUI {
         ui.setItem(22, gameSev1);
 
         ArrayList<String> gameSev2Lore = new ArrayList<>();
-        gameSev2Lore.add(ChatColor.GRAY + "Duration: " + ChatColor.YELLOW + "0");
+        gameSev2Lore.add(ChatColor.GRAY + "Duration: " + ChatColor.YELLOW + "12 hours");
         ItemStack gameSev2 = new ItemStack(Material.WOOL, 1, (byte) 4);
         ItemMeta gameSev2Meta = gameSev2.getItemMeta();
         gameSev2Meta.setDisplayName(ChatColor.YELLOW.toString() + ChatColor.BOLD + "Severity 2");
@@ -86,7 +86,7 @@ public class PunishUI {
         ui.setItem(31, gameSev2);
 
         ArrayList<String> gameSev3Lore = new ArrayList<>();
-        gameSev3Lore.add(ChatColor.GRAY + "Duration: " + ChatColor.YELLOW + "0");
+        gameSev3Lore.add(ChatColor.GRAY + "Duration: " + ChatColor.YELLOW + "1 day");
         ItemStack gameSev3 = new ItemStack(Material.WOOL, 1, (byte) 14);
         ItemMeta gameSev3Meta = gameSev3.getItemMeta();
         gameSev3Meta.setDisplayName(ChatColor.RED.toString() + ChatColor.BOLD + "Severity 3");
@@ -108,7 +108,7 @@ public class PunishUI {
         ui.setItem(15, hackCategory);
 
         ArrayList<String> hackSev1Lore = new ArrayList<>();
-        hackSev1Lore.add(ChatColor.GRAY + "Duration: " + ChatColor.YELLOW + "0");
+        hackSev1Lore.add(ChatColor.GRAY + "Duration: " + ChatColor.YELLOW + "12 hours");
         ItemStack hackSev1 = new ItemStack(Material.WOOL, 1, (byte) 5);
         ItemMeta hackSev1Meta = hackSev1.getItemMeta();
         hackSev1Meta.setDisplayName(ChatColor.GREEN.toString() + ChatColor.BOLD + "Severity 1");
@@ -117,7 +117,7 @@ public class PunishUI {
         ui.setItem(24, hackSev1);
 
         ArrayList<String> hackSev2Lore = new ArrayList<>();
-        hackSev2Lore.add(ChatColor.GRAY + "Duration: " + ChatColor.YELLOW + "0");
+        hackSev2Lore.add(ChatColor.GRAY + "Duration: " + ChatColor.YELLOW + "7 days");
         ItemStack hackSev2 = new ItemStack(Material.WOOL, 1, (byte) 4);
         ItemMeta hackSev2Meta = hackSev2.getItemMeta();
         hackSev2Meta.setDisplayName(ChatColor.YELLOW.toString() + ChatColor.BOLD + "Severity 2");
@@ -126,7 +126,7 @@ public class PunishUI {
         ui.setItem(33, hackSev2);
 
         ArrayList<String> hackSev3Lore = new ArrayList<>();
-        hackSev3Lore.add(ChatColor.GRAY + "Duration: " + ChatColor.YELLOW + "0");
+        hackSev3Lore.add(ChatColor.GRAY + "Duration: " + ChatColor.YELLOW + "1 month");
         ItemStack hackSev3 = new ItemStack(Material.WOOL, 1, (byte) 14);
         ItemMeta hackSev3Meta = hackSev3.getItemMeta();
         hackSev3Meta.setDisplayName(ChatColor.RED.toString() + ChatColor.BOLD + "Severity 3");
