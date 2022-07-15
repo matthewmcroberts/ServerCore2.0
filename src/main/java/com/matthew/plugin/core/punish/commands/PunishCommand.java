@@ -16,19 +16,16 @@ import java.sql.SQLException;
 
 public class PunishCommand implements CommandExecutor {
 
-
-    // /p player reason
-
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 
-        if(sender instanceof Player) {
+        if (sender instanceof Player) {
             Player player = (Player) sender;
             try {
-                if(RankUtils.isMod(player)) {
-                    if(args.length >= 2) {
-                        if(!args[0].equalsIgnoreCase("remove")) {
-                            if(Bukkit.getOfflinePlayer(args[0]) != null) {
+                if (RankUtils.isMod(player)) {
+                    if (args.length >= 2) {
+                        if (!args[0].equalsIgnoreCase("remove")) {
+                            if (Bukkit.getOfflinePlayer(args[0]) != null) {
                                 OfflinePlayer target = Bukkit.getOfflinePlayer(args[0]);
 
                                 StringBuilder reason = new StringBuilder();
@@ -42,13 +39,19 @@ public class PunishCommand implements CommandExecutor {
                                 MessageUtils.playerNotFound(player);
                             }
                         } else {
-                            if(Bukkit.getOfflinePlayer(args[1]) != null) {
-                                OfflinePlayer target = Bukkit.getOfflinePlayer(args[1]);
-                                PunishRemove.removePunishment(player, target);
-                            } else {
-                                MessageUtils.playerNotFound(player);
+                            if (args[0].equalsIgnoreCase("remove")) {
+                                if (Bukkit.getOfflinePlayer(args[1]) != null) {
+                                    OfflinePlayer target = Bukkit.getOfflinePlayer(args[1]);
+                                    PunishRemove.removePunishment(player, target);
+                                } else {
+                                    MessageUtils.playerNotFound(player);
+                                }
                             }
                         }
+                    } else if (args[0].equalsIgnoreCase("usage")) {
+                        MessageUtils.commandUsage(player, "Punish");
+                        MessageUtils.addToList(player, "/punish (player) (reason)");
+                        MessageUtils.addToList(player, "/punish remove (player)");
                     } else {
                         MessageUtils.incorrectUsage(player, "/punish (player) (reason)");
                         MessageUtils.addToList(player, "/punish remove (player)");

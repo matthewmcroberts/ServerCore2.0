@@ -40,6 +40,10 @@ public class HelpUtils {
         vanish.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/v usage"));
         player.spigot().sendMessage(vanish);
 
+        TextComponent punish = new TextComponent("        §9- §ePunish");
+        punish.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/p usage"));
+        player.spigot().sendMessage(punish);
+
         TextComponent setrank = new TextComponent("        §9- §eSet Rank");
         setrank.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/setrank usage"));
         player.spigot().sendMessage(setrank);
@@ -90,6 +94,10 @@ public class HelpUtils {
         vanish.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/v usage"));
         player.spigot().sendMessage(vanish);
 
+        TextComponent punish = new TextComponent("        §9- §ePunish");
+        punish.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/p usage"));
+        player.spigot().sendMessage(punish);
+
         TextComponent adminHelp = new TextComponent("        §9- §eAdmin Help");
         adminHelp.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/a usage"));
         player.spigot().sendMessage(adminHelp);
@@ -135,6 +143,10 @@ public class HelpUtils {
         TextComponent vanish = new TextComponent("        §9- §eVanish");
         vanish.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/v usage"));
         player.spigot().sendMessage(vanish);
+
+        TextComponent punish = new TextComponent("        §9- §ePunish");
+        punish.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/p usage"));
+        player.spigot().sendMessage(punish);
 
         TextComponent adminHelp = new TextComponent("        §9- §eAdmin Help");
         adminHelp.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/a usage"));
