@@ -24,3 +24,6 @@ A player punishment system that improves upon the basics that any server are giv
 
 ### Player Settings
 Works as a preference system for what a player may want enabled or disabled
+
+### Database
+Applies my localhost SQL database for storing player information
