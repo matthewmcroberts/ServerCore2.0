@@ -12,6 +12,7 @@ The purpose of ServerCore2.0 is to add essential components to any basic Minecra
 - /heal
 - /punish
 - /help
+- etc...
 
 ### Player Rank System
 A player ranking system that sorts players into a rank 
