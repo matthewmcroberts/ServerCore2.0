@@ -39,14 +39,12 @@ public class PunishCommand implements CommandExecutor {
                                 MessageUtils.playerNotFound(player);
                             }
                         } else {
-                            if (args[0].equalsIgnoreCase("remove")) {
                                 if (Bukkit.getOfflinePlayer(args[1]) != null) {
                                     OfflinePlayer target = Bukkit.getOfflinePlayer(args[1]);
                                     PunishRemove.removePunishment(player, target);
                                 } else {
                                     MessageUtils.playerNotFound(player);
                                 }
-                            }
                         }
                     } else if (args.length == 1 && args[0].equalsIgnoreCase("usage")) {
                         MessageUtils.commandUsage(player, "Punish");
