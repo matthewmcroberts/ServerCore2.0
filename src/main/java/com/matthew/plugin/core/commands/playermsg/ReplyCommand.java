@@ -2,6 +2,7 @@ package com.matthew.plugin.core.commands.playermsg;
 
 
 import com.matthew.plugin.core.ServerCore;
+import com.matthew.plugin.core.commands.vanish.VanishManager;
 import com.matthew.plugin.core.utils.MessageUtils;
 import com.matthew.plugin.core.utils.RankUtils;
 import org.bukkit.ChatColor;
@@ -25,23 +26,18 @@ public class ReplyCommand implements CommandExecutor {
                     if (args.length > 0) {
                         if(!args[0].equalsIgnoreCase("usage")) {
                             if (ServerCore.recentlyMessaged.containsKey(player)) {
-                                if (ServerCore.recentlyMessaged.get(player).getPlayer().isOnline()) {
+                                if (ServerCore.recentlyMessaged.get(player).getPlayer().isOnline() && !VanishManager.getIfVanished(ServerCore.recentlyMessaged.get(player))) {
                                     Player target = ServerCore.recentlyMessaged.get(player);
-                                    //if (Main.getVanishManager().getVanishedState(target) != true) {
 
                                     StringBuilder message = new StringBuilder();
                                     for (int i = 0; i < args.length; i++) {
                                         message.append(args[i]).append(" ");
                                     }
-
+                                    
                                     player.sendMessage(ChatColor.BLUE + player.getName() + " > " + target.getName() + ChatColor.GRAY + " " + message.toString());
                                     target.sendMessage(ChatColor.BLUE + player.getName() + " > " + target.getName() + ChatColor.GRAY + " " + message.toString());
                                     target.playSound(target.getLocation(), Sound.SUCCESSFUL_HIT, 1.0F, 1F);
 
-
-                                    //} else {
-                                    //player.sendMessage(ChatColor.BLUE + ">> " + ChatColor.GRAY + "The player has logged out.");
-                                    //}
                                 } else {
                                     player.sendMessage(ChatColor.BLUE + ">> " + ChatColor.GRAY + "The player has logged out.");
                                 }

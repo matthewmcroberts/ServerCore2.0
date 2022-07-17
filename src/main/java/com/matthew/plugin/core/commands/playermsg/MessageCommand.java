@@ -27,8 +27,6 @@ public class MessageCommand implements CommandExecutor {
                             Player target = Bukkit.getPlayerExact(args[0]);
                             if (Bukkit.getPlayerExact(args[0]) != null && !VanishManager.getIfVanished(target)) {
 
-                                //if (!main.getMessageManager().pmToggle.contains(target.getUniqueId())) {
-
                                 StringBuilder message = new StringBuilder();
                                 for (int i = 1; i < args.length; i++) {
                                     message.append(args[i]).append(" ");
@@ -41,12 +39,7 @@ public class MessageCommand implements CommandExecutor {
                                 if (ServerCore.recentlyMessaged.containsKey(player)) {
                                     ServerCore.recentlyMessaged.remove(player);
                                 }
-
                                 ServerCore.recentlyMessaged.put(player, target);
-
-                                //} else {
-                                //player.sendMessage(ChatColor.BLUE + ">> " + ChatColor.GOLD + target.getName() + ChatColor.GOLD + "'s" + ChatColor.GRAY + " messages are disabled.");
-                                //}
 
                             } else {
                                 MessageUtils.playerNotFound(player);
