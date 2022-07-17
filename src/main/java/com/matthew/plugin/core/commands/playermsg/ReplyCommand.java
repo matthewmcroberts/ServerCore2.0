@@ -33,7 +33,7 @@ public class ReplyCommand implements CommandExecutor {
                                     for (int i = 0; i < args.length; i++) {
                                         message.append(args[i]).append(" ");
                                     }
-                                    
+
                                     player.sendMessage(ChatColor.BLUE + player.getName() + " > " + target.getName() + ChatColor.GRAY + " " + message.toString());
                                     target.sendMessage(ChatColor.BLUE + player.getName() + " > " + target.getName() + ChatColor.GRAY + " " + message.toString());
                                     target.playSound(target.getLocation(), Sound.SUCCESSFUL_HIT, 1.0F, 1F);
