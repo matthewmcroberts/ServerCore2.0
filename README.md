@@ -22,8 +22,5 @@ A player ranking system that sorts players into a rank
 ### Punishment System (Not finished)
 A player punishment system that improves upon the basics that any server are given. 
 
-### Player Settings
-Works as a preference system for what a player may want enabled or disabled
-
 ### Database
 Applies my localhost SQL database for storing player information
