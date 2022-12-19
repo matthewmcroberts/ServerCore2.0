@@ -60,7 +60,7 @@ public class HealCommand implements CommandExecutor {
                             player.sendMessage(ChatColor.BLUE + ">> " + ChatColor.GRAY + "You cannot heal while in" + ChatColor.GOLD +
                                     " creative.");
                         }
-                    } else if (args.length > 1) {
+                    } else {
                         MessageUtils.incorrectUsage(player, "/heal");
                         MessageUtils.addToList(player, "/heal (player)");
                     }

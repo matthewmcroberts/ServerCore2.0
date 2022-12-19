@@ -63,20 +63,19 @@ public final class ServerCore extends JavaPlugin {
     public void onEnable() {
 
         instance = this;
-        new NametagsManager();
-
-        try {
-            openConnection();
-            System.out.println("Connected to database");
-        } catch (SQLException x) {
-            System.out.println("Failed to connect to mysql database");
-        }
 
         registerCommands();
         registerListeners();
         runConstructors();
 
         getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "\n\nServerCore has been enabled\n");
+
+        try {
+            openConnection();
+            getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "Connected to database");
+        } catch (SQLException x) {
+            getServer().getConsoleSender().sendMessage(ChatColor.RED + "Failed to connect to database");
+        }
 
     }
 
@@ -109,7 +108,7 @@ public final class ServerCore extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new GamemodeListener(), this);
         Bukkit.getPluginManager().registerEvents(new PlayerJoinLeaveListener(), this);
         Bukkit.getPluginManager().registerEvents(new ServerListPingListener(), this);
-        Bukkit.getPluginManager().registerEvents(new OutOfBoundsListener(), this);
+        //Bukkit.getPluginManager().registerEvents(new OutOfBoundsListener(), this);
         Bukkit.getPluginManager().registerEvents(new VanishedPlayerJoinEvent(), this);
         Bukkit.getPluginManager().registerEvents(new NonVanishedPlayerJoinEvent(), this);
         Bukkit.getPluginManager().registerEvents(new VanishedPlayerQuitEvent(), this);

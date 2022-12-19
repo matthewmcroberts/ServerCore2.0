@@ -4,26 +4,29 @@ import org.bukkit.ChatColor;
 
 public enum Ranks {
 
-    OWNER("OWNER", ChatColor.RED),
-    DEV("DEV", ChatColor.RED),
-    QAT("QAT", ChatColor.BLUE),
-    ADMIN("ADMIN", ChatColor.RED),
-    SRMOD("SRMOD", ChatColor.GOLD),
-    MOD("MOD", ChatColor.GOLD),
-    JRMOD("JRMOD", ChatColor.DARK_AQUA),
-    BUILDER("BUILDER", ChatColor.BLUE),
-    GOD("GOD", ChatColor.AQUA),
-    SLAYER("SLAYER", ChatColor.DARK_PURPLE),
-    KNOWN("KNOWN", ChatColor.GREEN),
-    MEMBER("MEMBER", ChatColor.GRAY);
+    OWNER("OWNER", ChatColor.RED, 'a'),
+    DEV("DEV", ChatColor.RED, 'b'),
+    QAT("QAT", ChatColor.BLUE, 'c'),
+    ADMIN("ADMIN", ChatColor.RED, 'd'),
+    SRMOD("SRMOD", ChatColor.GOLD, 'e'),
+    MOD("MOD", ChatColor.GOLD, 'f'),
+    JRMOD("JRMOD", ChatColor.DARK_AQUA, 'g'),
+    BUILDER("BUILDER", ChatColor.BLUE, 'h'),
+    GOD("GOD", ChatColor.AQUA, 'i'),
+    SLAYER("SLAYER", ChatColor.DARK_PURPLE, 'j'),
+    KNOWN("KNOWN", ChatColor.GREEN, 'k'),
+    MEMBER("MEMBER", ChatColor.GRAY, 'l');
 
-    private String name;
+    private final String name;
 
-    private ChatColor color;
+    private final ChatColor color;
 
-    Ranks(String name, ChatColor color) {
+    private final char lexicographicOrder;
+
+    Ranks(String name, ChatColor color, char lexicographicOrder) {
         this.name = name;
         this.color = color;
+        this.lexicographicOrder = lexicographicOrder;
     }
 
     public String getName() {
@@ -34,5 +37,9 @@ public enum Ranks {
     public ChatColor getColor() {
 
         return this.color;
+    }
+
+    public char getLexicographicOrder() {
+        return lexicographicOrder;
     }
 }

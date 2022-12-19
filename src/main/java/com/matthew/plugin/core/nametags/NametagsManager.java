@@ -1,68 +1,51 @@
 package com.matthew.plugin.core.nametags;
 
+import com.matthew.plugin.core.ranks.Ranks;
+import com.matthew.plugin.core.ranks.apis.RankManager;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.entity.Player;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.Team;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class NametagsManager {
 
-    private static ArrayList<Team> teamsList;
-    public static final Scoreboard tabBoard = Bukkit.getScoreboardManager().getMainScoreboard();
-    private static Team owner, dev, qat, admin, srmod, mod, jrmod, builder, god, slayer, known, member;
+    /**
+     * Create scoreboard & teams
+     *
+     * @param player - player
+     */
+    public static void setNametags(Player player) {
+        player.setScoreboard(Bukkit.getScoreboardManager().getNewScoreboard());
 
-    public NametagsManager() {
-        teamsList = new ArrayList<>();
-        registerTeams();
-        addTeamsToList();
+        for (Ranks rank : Ranks.values()) {
+            Team team = player.getScoreboard().registerNewTeam(rank.getLexicographicOrder() + rank.name());
+            team.setPrefix(rank.getColor() + "[" + rank.getName() + "] ");
+        }
     }
 
-    private static void registerTeams() {
-        owner = tabBoard.getTeam("a");
-        dev = tabBoard.getTeam("b");
-        qat = tabBoard.getTeam("c");
-        admin = tabBoard.getTeam("d");
-        srmod = tabBoard.getTeam("e");
-        mod = tabBoard.getTeam("f");
-        jrmod = tabBoard.getTeam("g");
-        builder = tabBoard.getTeam("h");
-        god = tabBoard.getTeam("i");
-        slayer = tabBoard.getTeam("j");
-        known = tabBoard.getTeam("k");
-        member = tabBoard.getTeam("A");
-        owner.setPrefix(ChatColor.RED + "[OWNER] ");
-        dev.setPrefix(ChatColor.RED + "[DEV] ");
-        qat.setPrefix(ChatColor.BLUE + "[QAT] ");
-        admin.setPrefix(ChatColor.RED + "[ADMIN] ");
-        srmod.setPrefix(ChatColor.GOLD + "[SR.MOD] ");
-        mod.setPrefix(ChatColor.GOLD + "[MOD] ");
-        jrmod.setPrefix(ChatColor.DARK_AQUA + "[JR.MOD] ");
-        builder.setPrefix(ChatColor.BLUE + "[BUILDER] ");
-        god.setPrefix(ChatColor.AQUA + "[GOD] ");
-        slayer.setPrefix(ChatColor.DARK_PURPLE + "[SLAYER] ");
-        known.setPrefix(ChatColor.GREEN + "[KNOWN] ");
-        member.setPrefix(ChatColor.GRAY + "[MEMBER] ");
+    /**
+     * Assign player to their team
+     *
+     * @param player - player
+     */
+    public static void newTag(Player player) throws SQLException {
+        for (Player target : Bukkit.getOnlinePlayers()) {
+            target.getScoreboard().getTeam(RankManager.getRank(player).getLexicographicOrder() + RankManager.getRank(player).getName()).addEntry(player.getName());
+        }
     }
 
-    private static void addTeamsToList() {
-        teamsList.add(owner);
-        teamsList.add(dev);
-        teamsList.add(qat);
-        teamsList.add(admin);
-        teamsList.add(srmod);
-        teamsList.add(mod);
-        teamsList.add(jrmod);
-        teamsList.add(builder);
-        teamsList.add(god);
-        teamsList.add(slayer);
-        teamsList.add(known);
-        teamsList.add(member);
-
-    }
-
-    public static ArrayList<Team> getTeamsList() {
-        return teamsList;
+    /**
+     * Remove player from all scoreboards
+     *
+     * @param player - player
+     */
+    public static void removeTag(Player player) {
+        for (Player target : Bukkit.getOnlinePlayers()) {
+            target.getScoreboard().getEntryTeam(player.getName()).removeEntry(player.getName());
+        }
     }
 }

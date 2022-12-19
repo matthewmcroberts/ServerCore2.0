@@ -20,15 +20,16 @@ import java.util.Calendar;
 
 public class PunishListener implements Listener {
 
+    @SuppressWarnings("DuplicateBranchesInSwitch")
     @EventHandler
     public void onClick(InventoryClickEvent e) {
 
         Player player = (Player) e.getWhoClicked();
         Calendar cal = Calendar.getInstance();
 
-        if(ChatColor.translateAlternateColorCodes('&', e.getView().getTitle()).contains(ChatColor.GOLD + "Punish - ") && e.getCurrentItem() != null) {
+        if (ChatColor.translateAlternateColorCodes('&', e.getView().getTitle()).contains(ChatColor.GOLD + "Punish - ") && e.getCurrentItem() != null) {
             e.setCancelled(true);
-            if(Bukkit.getOfflinePlayer(e.getView().getTitle().substring(11)) != null) {
+            if (Bukkit.getOfflinePlayer(e.getView().getTitle().substring(11)) != null) {
                 OfflinePlayer target = Bukkit.getOfflinePlayer(e.getView().getTitle().substring(11));
 
                 switch (e.getRawSlot()) {
@@ -110,8 +111,8 @@ public class PunishListener implements Listener {
 
     @EventHandler
     public void onClose(InventoryCloseEvent e) {
-        if(ChatColor.translateAlternateColorCodes('&', e.getView().getTitle()).contains(ChatColor.GOLD + "Punish - ")) {
-                ServerCore.punishReason.remove(e.getPlayer());
+        if (ChatColor.translateAlternateColorCodes('&', e.getView().getTitle()).contains(ChatColor.GOLD + "Punish - ")) {
+            ServerCore.punishReason.remove(e.getPlayer());
         }
     }
 
@@ -130,5 +131,7 @@ public class PunishListener implements Listener {
                 ex.printStackTrace();
             }
         }
+
+
     }
 }

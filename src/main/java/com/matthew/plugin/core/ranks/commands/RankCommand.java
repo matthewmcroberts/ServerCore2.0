@@ -27,7 +27,7 @@ public class RankCommand implements CommandExecutor {
                         Player target = Bukkit.getPlayerExact(args[0]);
                         if (RankUtils.isValidRank(args[1])) {
                             RankManager.setRank(target.getPlayer(), Ranks.valueOf(args[1].toUpperCase()));
-                            RankUtils.assignNametag(target);
+                            //RankUtils.assignNametag(target);
                             player.sendMessage(ChatColor.BLUE + ">> " + ChatColor.GRAY + "Updated " + ChatColor.GOLD + target.getName() + "'s " + ChatColor.GRAY + "rank to " + ChatColor.GOLD + args[1] + ".");
                             if (Bukkit.getOfflinePlayer(args[0]).isOnline()) {
                                 if(target != player) {
