@@ -93,4 +93,22 @@ public class InventoryManager {
             MessageUtils.sendCustomMessage(player, ChatColor.GOLD + target.getName() + ChatColor.GOLD + ChatColor.GRAY + " has not been killed.");
         }
     }
+
+    public static void inventoryCopy(Player player, Player target) {
+        Inventory playerInv = player.getInventory();
+        if(target != player) {
+            if (target.getPlayer() != null) {
+                Inventory targetInv = target.getInventory();
+                inventoryClear(player);
+                playerInv.setContents(targetInv.getContents());
+                player.getInventory().setArmorContents(target.getInventory().getArmorContents());
+                MessageUtils.sendCustomMessage(player, ChatColor.GRAY + "Successfully copied" + ChatColor.GOLD + target.getName() + "'s" + ChatColor.GRAY + " inventory.");
+
+            } else {
+                MessageUtils.playerNotFound(player);
+            }
+        } else {
+            MessageUtils.sendCustomMessage(player, "You cannot copy your own inventory.");
+        }
+    }
 }

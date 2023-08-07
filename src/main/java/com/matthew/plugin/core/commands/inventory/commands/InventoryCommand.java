@@ -26,46 +26,44 @@ public class InventoryCommand implements CommandExecutor {
 
                 if (RankUtils.isMod(player)) {
                     if (args.length == 2) {
-                        switch (args[0]) {
-                            case "clear":
-                                Player target = Bukkit.getPlayerExact(args[1]);
-                                if (target != null) {
+                        Player target = Bukkit.getPlayerExact(args[1]);
+                        if (target != null) {
+                            switch (args[0]) {
+                                case "clear":
                                     InventoryManager.inventoryClear(player, target);
-                                } else {
-                                    MessageUtils.playerNotFound(player);
-                                }
+                                    break;
+                                case "restore":
+                                    InventoryManager.inventoryRestore(player, target);
+                                    break;
+                                case "copy":
+                                    InventoryManager.inventoryCopy(player, target);
+                                    break;
+                                default:
+                                    MessageUtils.incorrectUsage(player, "/inventory clear");
+                                    MessageUtils.addToList(player, "/inventory clear (player)");
+                                    MessageUtils.addToList(player, "/inventory restore (player)");
+                                    MessageUtils.addToList(player, "/inventory copy (player)");
+                            }
 
-                                break;
-                            case "restore":
-                                Player target2 = Bukkit.getPlayerExact(args[1]);
-                                if (target2 != null) {
-                                    InventoryManager.inventoryRestore(player, target2);
-                                } else {
-                                    MessageUtils.playerNotFound(player);
-                                }
-
-                                break;
-                            default:
-                                MessageUtils.incorrectUsage(player, "/inventory clear");
-                                player.sendMessage(ChatColor.BLUE + "    - " + ChatColor.GOLD + "/inventory clear (player)");
-                                player.sendMessage(ChatColor.BLUE + "    - " + ChatColor.GOLD + "/inventory restore (player)");
-
-                                break;
+                        } else {
+                            MessageUtils.playerNotFound(player);
                         }
-
                     } else if ((args.length == 1) && args[0].equalsIgnoreCase("clear")) {
                         InventoryManager.inventoryClear(player);
 
                     } else if ((args.length == 1) && args[0].equalsIgnoreCase("usage")) {
                         MessageUtils.commandUsage(player, "Inventory");
+                        MessageUtils.addToList(player, "/inventory clear");
                         MessageUtils.addToList(player, "/inventory clear (player)");
                         MessageUtils.addToList(player, "/inventory restore (player)");
-                        MessageUtils.addToList(player, "/inventory clear");
+                        MessageUtils.addToList(player, "/inventory copy (player)");
 
                     } else {
                         MessageUtils.incorrectUsage(player, "/inventory clear");
                         MessageUtils.addToList(player, "/inventory clear (player)");
                         MessageUtils.addToList(player, "/inventory restore (player)");
+                        MessageUtils.addToList(player, "/inventory copy (player)");
+
                     }
                 } else {
                     MessageUtils.modRank(player);
