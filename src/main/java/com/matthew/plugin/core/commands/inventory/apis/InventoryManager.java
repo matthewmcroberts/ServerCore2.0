@@ -99,10 +99,23 @@ public class InventoryManager {
         if(target != player) {
             if (target.getPlayer() != null) {
                 Inventory targetInv = target.getInventory();
-                inventoryClear(player);
+
+                //Clear Player's Inventory//
+                player.getInventory().setChestplate(new ItemStack(Material.AIR));
+                player.getInventory().setLeggings(new ItemStack(Material.AIR));
+                player.getInventory().setBoots(new ItemStack(Material.AIR));
+                player.getInventory().setHelmet(new ItemStack(Material.AIR));
+
+                for (int inv = 0; inv < playerInv.getSize(); inv++) {
+                    if (playerInv.getItem(inv) != null) {
+                        playerInv.setItem(inv, new ItemStack(Material.AIR));
+                    }
+                }
+                /////////
+
                 playerInv.setContents(targetInv.getContents());
                 player.getInventory().setArmorContents(target.getInventory().getArmorContents());
-                MessageUtils.sendCustomMessage(player, ChatColor.GRAY + "Successfully copied" + ChatColor.GOLD + target.getName() + "'s" + ChatColor.GRAY + " inventory.");
+                MessageUtils.sendCustomMessage(player, ChatColor.GRAY + "Successfully copied " + ChatColor.GOLD + target.getName() + "'s" + ChatColor.GRAY + " inventory.");
 
             } else {
                 MessageUtils.playerNotFound(player);
