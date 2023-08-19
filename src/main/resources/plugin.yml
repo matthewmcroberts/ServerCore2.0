@@ -2,7 +2,7 @@ name: ServerCore
 version: 1.0
 main: com.matthew.plugin.core.ServerCore
 author: GoofIt
-api-version: 1.8.8
+api-version: 1.19
 commands:
   setrank:
     aliases: [rank]

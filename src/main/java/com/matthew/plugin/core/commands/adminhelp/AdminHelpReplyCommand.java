@@ -34,11 +34,11 @@ public class AdminHelpReplyCommand implements CommandExecutor {
                         if (target != null) {
                             player.sendMessage(ChatColor.BOLD + ChatColor.RED.toString() + ChatColor.DARK_PURPLE + "-> "
                                     + RankManager.getRank(target).getColor() + "[" + RankManager.getRank(target).getName() + "] " + target.getName() + ChatColor.GOLD + " " + message);
-                            player.playSound(player.getLocation(), Sound.NOTE_PIANO, 1.0F, 1F);
+                            player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BELL, 1.0F, 1F);
 
                             target.sendMessage(ChatColor.BOLD + ChatColor.RED.toString() + ChatColor.DARK_PURPLE + "<- "
                                     + RankManager.getRank(player).getColor() + "[" + RankManager.getRank(player).getName() + "] " + player.getName() + ChatColor.GOLD + " " + message);
-                            target.playSound(target.getLocation(), Sound.NOTE_PIANO, 1.0F, 2F);
+                            target.playSound(target.getLocation(), Sound.BLOCK_NOTE_BLOCK_BELL, 1.0F, 2F);
                         } else {
                             MessageUtils.playerNotFound(player);
                         }

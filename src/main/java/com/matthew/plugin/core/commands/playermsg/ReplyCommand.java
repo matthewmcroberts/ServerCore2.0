@@ -36,7 +36,7 @@ public class ReplyCommand implements CommandExecutor {
 
                                     player.sendMessage(ChatColor.BLUE + player.getName() + " > " + target.getName() + ChatColor.GRAY + " " + message.toString());
                                     target.sendMessage(ChatColor.BLUE + player.getName() + " > " + target.getName() + ChatColor.GRAY + " " + message.toString());
-                                    target.playSound(target.getLocation(), Sound.SUCCESSFUL_HIT, 1.0F, 1F);
+                                    target.playSound(target.getLocation(), Sound.ITEM_CROSSBOW_HIT, 1.0F, 1F);
 
                                 } else {
                                     player.sendMessage(ChatColor.BLUE + ">> " + ChatColor.GRAY + "The player has logged out.");

@@ -24,6 +24,7 @@ public class NametagsManager {
         for (Ranks rank : Ranks.values()) {
             Team team = player.getScoreboard().registerNewTeam(rank.getLexicographicOrder() + rank.name());
             team.setPrefix(rank.getColor() + "[" + rank.getName() + "] ");
+            team.setColor(rank.getColor());
         }
     }
 

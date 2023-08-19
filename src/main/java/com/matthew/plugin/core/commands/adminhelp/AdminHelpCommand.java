@@ -32,10 +32,10 @@ public class AdminHelpCommand implements CommandExecutor {
 
                             if (target.equals(player)) {
                                 player.sendMessage(RankManager.getRank(player).getColor() + "[" + RankManager.getRank(player).getName() + "] " + player.getName() + " " + ChatColor.GOLD + message);
-                                player.playSound(player.getLocation(), Sound.NOTE_PIANO, 1.0F, 1F);
+                                player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BELL, 1.0F, 1F);
                             } else if (RankUtils.isJrMod(target)) {
                                 target.sendMessage(RankManager.getRank(player).getColor() + "[" + RankManager.getRank(player).getName() + "] " + player.getName() + " " + ChatColor.GOLD + message);
-                                target.playSound(target.getLocation(), Sound.NOTE_PIANO, 1.0F, 1F);
+                                target.playSound(target.getLocation(), Sound.BLOCK_NOTE_BLOCK_BELL, 1.0F, 1F);
                             }
                         } catch (SQLException e) {
                             e.printStackTrace();
