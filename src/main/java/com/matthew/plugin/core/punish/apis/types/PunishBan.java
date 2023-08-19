@@ -1,4 +1,4 @@
-package com.matthew.plugin.core.punish.punishments;
+package com.matthew.plugin.core.punish.apis.types;
 
 import com.matthew.plugin.core.utils.MessageUtils;
 import org.bukkit.BanList;

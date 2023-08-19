@@ -1,4 +1,4 @@
-package com.matthew.plugin.core.punish.punishments;
+package com.matthew.plugin.core.punish.apis.types;
 
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;

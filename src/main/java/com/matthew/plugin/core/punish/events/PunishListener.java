@@ -1,9 +1,7 @@
 package com.matthew.plugin.core.punish.events;
 
 import com.matthew.plugin.core.ServerCore;
-import com.matthew.plugin.core.punish.punishments.PunishBan;
-import com.matthew.plugin.core.ranks.Ranks;
-import com.matthew.plugin.core.ranks.apis.RankManager;
+import com.matthew.plugin.core.punish.apis.types.PunishBan;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;
@@ -12,10 +10,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
-import org.bukkit.event.player.PlayerJoinEvent;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.Calendar;
 
 public class PunishListener implements Listener {
@@ -116,7 +111,7 @@ public class PunishListener implements Listener {
         }
     }
 
-    @EventHandler
+   /* @EventHandler
     public void onJoin(PlayerJoinEvent e) {
         Player player = e.getPlayer();
         if (!e.getPlayer().hasPlayedBefore()) {
@@ -132,6 +127,7 @@ public class PunishListener implements Listener {
             }
         }
 
-
     }
+
+    */
 }

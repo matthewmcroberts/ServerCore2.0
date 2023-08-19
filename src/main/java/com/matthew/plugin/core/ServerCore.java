@@ -1,6 +1,5 @@
 package com.matthew.plugin.core;
 
-import com.matthew.plugin.core.commands.EffectCommand;
 import com.matthew.plugin.core.commands.GiveCommand;
 import com.matthew.plugin.core.commands.HealCommand;
 import com.matthew.plugin.core.commands.adminhelp.AdminHelpCommand;
@@ -19,14 +18,12 @@ import com.matthew.plugin.core.commands.vanish.commands.VanishCommand;
 import com.matthew.plugin.core.commands.vanish.events.NonVanishedPlayerJoinEvent;
 import com.matthew.plugin.core.commands.vanish.events.VanishedPlayerJoinEvent;
 import com.matthew.plugin.core.commands.vanish.events.VanishedPlayerQuitEvent;
-import com.matthew.plugin.core.events.OutOfBoundsListener;
 import com.matthew.plugin.core.events.PlayerChatListener;
 import com.matthew.plugin.core.events.PlayerJoinLeaveListener;
 import com.matthew.plugin.core.events.ServerListPingListener;
 import com.matthew.plugin.core.events.disables.BuildingListener;
 import com.matthew.plugin.core.events.disables.FallDamageListener;
 import com.matthew.plugin.core.events.disables.WeatherChangeListener;
-import com.matthew.plugin.core.nametags.NametagsManager;
 import com.matthew.plugin.core.nametags.events.NametagsListener;
 import com.matthew.plugin.core.punish.commands.PunishCommand;
 import com.matthew.plugin.core.punish.events.PunishListener;
@@ -52,7 +49,7 @@ public final class ServerCore extends JavaPlugin {
 
     private static Connection connection;
     private final String host = "localhost";
-    private final String database = "testserver";
+    private final String database = "MCServer";
     private final String username = "root";
     private final String password = "";
     private final int port = 3306;
@@ -94,7 +91,6 @@ public final class ServerCore extends JavaPlugin {
         getCommand("tp").setExecutor(new TeleportCommand());
         getCommand("vanish").setExecutor(new VanishCommand());
         getCommand("give").setExecutor(new GiveCommand());
-        getCommand("effect").setExecutor(new EffectCommand());
         getCommand("inventory").setExecutor(new InventoryCommand());
         getCommand("silence").setExecutor(new SilenceCommand());
         getCommand("help").setExecutor(new HelpCommand());
