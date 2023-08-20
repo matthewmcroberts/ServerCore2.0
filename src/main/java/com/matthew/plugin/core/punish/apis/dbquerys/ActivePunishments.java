@@ -13,14 +13,16 @@ import java.util.UUID;
 
 public class ActivePunishments {
 
-    // uuid VARCHAR(PRIMARY)
+    // ID INTEGER(PRIMARY)(AI)
+    // uuid VARCHAR
     // type VARCHAR
     // sev INTEGER
     // reason TINYTEXT
     // issued TIMESTAMP
-    // expires TIMESTAMP
+    // expiration TIMESTAMP
     // staff VARCHAR
     // active BOOLEAN
+    // permanent BOOLEAN
 
     /**
      * Check if player UUID currently exists in the 'active_punishments' table
@@ -188,5 +190,22 @@ public class ActivePunishments {
             return rs.getString("REASON");
         }
         return null;
+    }
+
+    /**
+     * Get if the punishment issued to the player is permanent
+     *
+     * @param player - Player whose UUID is being queried
+     * @return condition whether punishment is permanent or not
+     */
+    public static boolean isPermanent(Player player) throws SQLException {
+        if(exists(player)) {
+            PreparedStatement ps = ServerCore.preparedStatement("SELECT PERMANENT FROM active_punishments WHERE UUID = ?");
+            ps.setString(1, player.getUniqueId().toString());
+            ResultSet rs = ps.executeQuery();
+            rs.next();
+            return rs.getBoolean("PERMANENT");
+        }
+        return false;
     }
 }
