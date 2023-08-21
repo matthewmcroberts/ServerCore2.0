@@ -81,13 +81,20 @@ public class ActivePunishments {
      * @param player - Player whose UUID is being queried
      * @return player that issued the punishment
      */
-    public static Player issuer(Player player) throws SQLException {
+    public static Player[] issuer(Player player) throws SQLException {
         if (exists(player)) {
+            Player[] list = new Player[2];
+            int count = 0;
             PreparedStatement ps = ServerCore.preparedStatement("SELECT STAFF FROM active_punishments WHERE UUID = ?");
             ps.setString(1, player.getUniqueId().toString());
             ResultSet rs = ps.executeQuery();
-            UUID uuid = UUID.fromString(rs.getString("STAFF"));
-            return Bukkit.getPlayer(uuid);
+            while(rs.next()) {
+                UUID uuid = UUID.fromString(rs.getString("STAFF"));
+
+                list[count] = Bukkit.getPlayer(uuid);
+                count++;
+            }
+            return list;
         }
         return null;
     }
@@ -99,17 +106,22 @@ public class ActivePunishments {
      * @return the expiration date as a string in the format of:
      *         'yyyy-MM-dd HH:mm:ss'
      */
-    public static String getExpirationDate(Player player) throws SQLException {
+    public static String[] getExpirationDate(Player player) throws SQLException {
         if (exists(player)) {
+            String[] expirations = new String[2];
+            int count = 0;
             PreparedStatement ps = ServerCore.preparedStatement("SELECT EXPIRATION FROM active_punishments WHERE UUID = ?");
             ps.setString(1, player.getUniqueId().toString());
             ResultSet rs = ps.executeQuery();
-            rs.next();
+            while(rs.next()) {
+                Timestamp timestamp = Timestamp.valueOf(rs.getTimestamp("EXPIRATION").toLocalDateTime());
+                String expiration = timestamp.toString();
+                expiration = expiration.substring(0, 19);
+                expirations[count] = expiration;
+                count++;
+            }
 
-            Timestamp timestamp = Timestamp.valueOf(rs.getTimestamp("EXPIRATION").toLocalDateTime());
-            String expiration = timestamp.toString();
-            expiration = expiration.substring(0, 19);
-            return expiration;
+            return expirations;
         }
         return null;
     }
