@@ -48,11 +48,6 @@ public final class ServerCore extends JavaPlugin {
 
 
     private static Connection connection;
-    private final String host = "localhost";
-    private final String database = "MCServer";
-    private final String username = "root";
-    private final String password = "";
-    private final int port = 3306;
 
     private static ServerCore instance;
 
@@ -61,9 +56,9 @@ public final class ServerCore extends JavaPlugin {
 
         instance = this;
 
+        runConstructors();
         registerCommands();
         registerListeners();
-        runConstructors();
 
         getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "\n\nServerCore has been enabled\n");
 
@@ -126,7 +121,12 @@ public final class ServerCore extends JavaPlugin {
         if (connection != null && !connection.isClosed()) {
             return;
         }
-        connection = DriverManager.getConnection("jdbc:mysql://" + this.host + ":" + this.port + "/" + this.database, this.username, this.password);
+        String database = "MCServer";
+        String host = "localhost";
+        String username = "root";
+        String password = "";
+        int port = 3306;
+        connection = DriverManager.getConnection("jdbc:mysql://" + host + ":" + port + "/" + database, username, password);
     }
 
     public static PreparedStatement preparedStatement(String query) {
