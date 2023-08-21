@@ -24,7 +24,8 @@ public class Utils {
     }
 
     /**
-     * Return the difference in time for start_date and end_date
+     * Return the difference in time for start_date and end_date as a one-dimensional array formatted as follows:
+     *  - {Years, Days, Hours, Minutes, Seconds}
      *
      * @param start_date - Issued
      * @param end_date - Expiration
