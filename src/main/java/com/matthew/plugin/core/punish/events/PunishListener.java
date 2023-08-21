@@ -92,7 +92,7 @@ public class PunishListener implements Listener {
 
                         break;
                     case 36: //perm ban
-                        PunishBan.permBan(player, target, ServerCore.punishReason.get(player));
+                        //PunishBan.permBan(player, target, ServerCore.punishReason.get(player));
                         player.closeInventory();
                         ServerCore.punishReason.remove(player);
 
