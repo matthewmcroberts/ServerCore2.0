@@ -9,6 +9,6 @@ public class ServerListPingListener implements Listener {
 
     @EventHandler
     public void onPing(ServerListPingEvent e) {
-        e.setMotd(ChatColor.BLUE + ">>" + ChatColor.GOLD + " GoofIt's" + ChatColor.GRAY + " Private Testing Server" + ChatColor.WHITE + " [1.8.9]");
+        e.setMotd(ChatColor.BLUE + ">>" + ChatColor.GOLD + " GoofIt's" + ChatColor.GRAY + " Private Testing Server" + ChatColor.WHITE + " [1.19.2]");
     }
 }
