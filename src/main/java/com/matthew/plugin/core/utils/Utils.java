@@ -25,12 +25,12 @@ public class Utils {
 
     /**
      * Return the difference in time for start_date and end_date as a one-dimensional array formatted as follows:
-     *  - {Years, Days, Hours, Minutes, Seconds}
+     * - {Years, Days, Hours, Minutes, Seconds}
      *
      * @param start_date - Issued
-     * @param end_date - Expiration
+     * @param end_date   - Expiration
      */
-    public static long[] findTimeDifference(String start_date, String end_date) {
+    public static String findTimeDifference(String start_date, String end_date) {
 
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
 
@@ -52,7 +52,7 @@ public class Utils {
 
             long diffInDays = (timeDifference / (1000 * 60 * 60 * 24)) % 365;
 
-            return new long[]{diffInYears, diffInDays, diffInHours, diffInMinutes, diffInSeconds};
+            return "[" + diffInYears + "," + diffInDays + "," + diffInHours + "," + diffInMinutes + "," + diffInSeconds + "]";
 
         } catch (ParseException e) {
             e.printStackTrace();
