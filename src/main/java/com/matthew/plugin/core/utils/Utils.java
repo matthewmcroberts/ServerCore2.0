@@ -6,6 +6,12 @@ import java.util.Date;
 
 public class Utils {
 
+    /**
+     * State whether a string is also the correct format for an integer
+     *
+     * @param string - number being checked
+     * @return if string can be parsed as an integer
+     */
     public static boolean isNumeric(String string) {
 
         int intValue;
