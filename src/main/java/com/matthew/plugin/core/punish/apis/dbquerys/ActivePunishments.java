@@ -242,4 +242,24 @@ public class ActivePunishments {
         }
         return null;
     }
+
+    /**
+     * Get the amount of punishments found for a specific player in the 'active_punishments' table
+     *
+     * @param player - Player whose UUID is being queried
+     * @return int representing amount of times a player appears in the table
+     */
+    public static int getAmount(Player player) throws SQLException {
+        if(exists(player)) {
+            int count = 0;
+            PreparedStatement ps = ServerCore.preparedStatement("SELECT PERMANENT FROM active_punishments WHERE UUID = ?");
+            ps.setString(1, player.getUniqueId().toString());
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()) {
+                count++;
+            }
+            return count;
+        }
+        return 0;
+    }
 }
