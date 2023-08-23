@@ -3,6 +3,7 @@ package com.matthew.plugin.core.punish.apis.dbquerys;
 import com.matthew.plugin.core.ServerCore;
 import com.matthew.plugin.core.utils.Utils;
 import org.bukkit.Bukkit;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 
 import java.sql.PreparedStatement;
@@ -37,7 +38,7 @@ public class ExpiredPunishments {
      * @param player - player whose UUID is being queried
      * @return condition stating if the player exists or not in the table
      */
-    private static boolean exists(Player player) throws SQLException {
+    private static boolean exists(OfflinePlayer player) throws SQLException {
         PreparedStatement ps = ServerCore.preparedStatement("SELECT COUNT(UUID) FROM expired_punishments WHERE UUID = ?;");
         ps.setString(1, player.getUniqueId().toString());
         ResultSet rs = ps.executeQuery();
@@ -53,7 +54,7 @@ public class ExpiredPunishments {
      * @param player - Player whose UUID is being queried
      * @return arraylist of times as type String
      */
-    public static ArrayList<String> getTimeRemaining(Player player) throws SQLException {
+    public static ArrayList<String> getTimeRemaining(OfflinePlayer player) throws SQLException {
         if (exists(player)) {
             ArrayList<String> remaining = new ArrayList<>();
 
@@ -93,9 +94,9 @@ public class ExpiredPunishments {
      * @param player - Player whose UUID is being queried
      * @return Staff(s) as type Player that issued the punishment
      */
-    public static ArrayList<Player> issuer(Player player) throws SQLException {
+    public static ArrayList<OfflinePlayer> issuer(OfflinePlayer player) throws SQLException {
         if (exists(player)) {
-            ArrayList<Player> list = new ArrayList<>();
+            ArrayList<OfflinePlayer> list = new ArrayList<>();
             PreparedStatement ps = ServerCore.preparedStatement("SELECT STAFF FROM expired_punishments WHERE UUID = ?");
             ps.setString(1, player.getUniqueId().toString());
             ResultSet rs = ps.executeQuery();
@@ -116,7 +117,7 @@ public class ExpiredPunishments {
      * @return the expiration date(s) as a string in the format of:
      *         'yyyy-MM-dd HH:mm:ss'
      */
-    public static ArrayList<String> getExpirationDate(Player player) throws SQLException {
+    public static ArrayList<String> getExpirationDate(OfflinePlayer player) throws SQLException {
         if (exists(player)) {
             ArrayList<String> expirations = new ArrayList<>();
             PreparedStatement ps = ServerCore.preparedStatement("SELECT EXPIRATION FROM expired_punishments WHERE UUID = ?");
@@ -141,7 +142,7 @@ public class ExpiredPunishments {
      * @return the issued date(s) as a string in the format of:
      *         'yyyy-MM-dd HH:mm:ss'
      */
-    public static ArrayList<String> getIssuedDate(Player player) throws SQLException {
+    public static ArrayList<String> getIssuedDate(OfflinePlayer player) throws SQLException {
         if(exists(player)) {
             ArrayList<String> issues = new ArrayList<>();
             PreparedStatement ps = ServerCore.preparedStatement("SELECT ISSUED FROM expired_punishments WHERE UUID = ?");
@@ -168,7 +169,7 @@ public class ExpiredPunishments {
      * @param player - Player whose UUID is being queried
      * @return the type of punishment(s) as a string
      */
-    public static ArrayList<String> getType(Player player) throws SQLException {
+    public static ArrayList<String> getType(OfflinePlayer player) throws SQLException {
         if(exists(player)) {
             ArrayList<String> types = new ArrayList<>();
             PreparedStatement ps = ServerCore.preparedStatement("SELECT TYPE FROM expired_punishments WHERE UUID = ?");
@@ -189,7 +190,7 @@ public class ExpiredPunishments {
      * @param player - Player whose UUID is being queried
      * @return an integer that refers to the severity level(s) applied
      */
-    public static ArrayList<Integer> getSeverity(Player player) throws SQLException {
+    public static ArrayList<Integer> getSeverity(OfflinePlayer player) throws SQLException {
         if(exists(player)) {
             ArrayList<Integer> sevs = new ArrayList<>();
             PreparedStatement ps = ServerCore.preparedStatement("SELECT SEV FROM expired_punishments WHERE UUID = ?");
@@ -209,7 +210,7 @@ public class ExpiredPunishments {
      * @param player - Player whose UUID is being queried
      * @return the reason(s) as a string
      */
-    public static ArrayList<String> getReason(Player player) throws SQLException {
+    public static ArrayList<String> getReason(OfflinePlayer player) throws SQLException {
         if(exists(player)) {
             ArrayList<String> reasons = new ArrayList<>();
             PreparedStatement ps = ServerCore.preparedStatement("SELECT REASON FROM expired_punishments WHERE UUID = ?");
@@ -229,7 +230,7 @@ public class ExpiredPunishments {
      * @param player - Player whose UUID is being queried
      * @return condition whether punishment(s) are permanent or not
      */
-    public static ArrayList<Boolean> isPermanent(Player player) throws SQLException {
+    public static ArrayList<Boolean> isPermanent(OfflinePlayer player) throws SQLException {
         if(exists(player)) {
             ArrayList<Boolean> perms = new ArrayList<>();
             PreparedStatement ps = ServerCore.preparedStatement("SELECT PERMANENT FROM expired_punishments WHERE UUID = ?");
@@ -249,7 +250,7 @@ public class ExpiredPunishments {
      * @param player - Player whose UUID is being queried
      * @return int representing amount of times a player appears in the table
      */
-    public static int getAmount(Player player) throws SQLException {
+    public static int getAmount(OfflinePlayer player) throws SQLException {
         if(exists(player)) {
             int count = 0;
             PreparedStatement ps = ServerCore.preparedStatement("SELECT PERMANENT FROM expired_punishments WHERE UUID = ?");
