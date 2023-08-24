@@ -3,6 +3,7 @@ package com.matthew.plugin.core.punish.apis.types;
 import com.matthew.plugin.core.ServerCore;
 import com.matthew.plugin.core.punish.apis.dbquerys.ActivePunishments;
 import com.matthew.plugin.core.utils.MessageUtils;
+import com.matthew.plugin.core.utils.PunishUtils;
 import org.bukkit.BanList;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -31,6 +32,7 @@ public class PunishBan {
     public static void permBan(Player issuer, OfflinePlayer target, String type, String reason) throws SQLException {
         if(ActivePunishments.getAmount(target) == 0) {
             insert(issuer, target, type, 4, reason, new Timestamp(System.currentTimeMillis()), true);
+            PunishUtils.sendPermBanMessage(issuer, target, type, reason);
             if(target.isOnline()) {
                 Player punished = (Player) target;
                 punished.kickPlayer("You have been perm banned");
@@ -38,6 +40,7 @@ public class PunishBan {
         } else if(ActivePunishments.getAmount(target) == 1) {
             if(ActivePunishments.getType(target).get(0).equalsIgnoreCase("Chat")) {
                 insert(issuer, target, type, 4, reason, new Timestamp(System.currentTimeMillis()), true);
+                PunishUtils.sendPermBanMessage(issuer, target, type, reason);
                 if(target.isOnline()) {
                     Player punished = (Player) target;
                     punished.kickPlayer("You have been perm banned");
@@ -53,6 +56,7 @@ public class PunishBan {
     public static void tempBan(Player issuer, OfflinePlayer target, String type, int sev, String reason, Timestamp expiration) throws SQLException {
         if(ActivePunishments.getAmount(target) == 0) {
             insert(issuer, target, type, sev, reason, expiration, false);
+            PunishUtils.sendTempBanMessage(issuer, target, type, reason, sev, expiration);
             if(target.isOnline()) {
                 Player punished = (Player) target;
                 punished.kickPlayer("You have been temp banned");
@@ -60,6 +64,7 @@ public class PunishBan {
         } else if(ActivePunishments.getAmount(target) == 1) {
             if(ActivePunishments.getType(target).get(0).equalsIgnoreCase("Chat")) {
                 insert(issuer, target, type, 4, reason, expiration, false);
+                PunishUtils.sendTempBanMessage(issuer, target, type, reason, sev, expiration);
                 if(target.isOnline()) {
                     Player punished = (Player) target;
                     punished.kickPlayer("You have been temp banned");
