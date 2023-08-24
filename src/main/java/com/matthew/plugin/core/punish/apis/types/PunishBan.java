@@ -28,12 +28,20 @@ public class PunishBan {
     // active BOOLEAN
     // permanent BOOLEAN
 
-    public static void permBan(Player issuer, OfflinePlayer target, String type, String reason, boolean permanent) throws SQLException {
+    public static void permBan(Player issuer, OfflinePlayer target, String type, String reason) throws SQLException {
         if(ActivePunishments.getAmount(target) == 0) {
-            insert(issuer, target, type, 4, reason, new Timestamp(System.currentTimeMillis()), permanent);
+            insert(issuer, target, type, 4, reason, new Timestamp(System.currentTimeMillis()), true);
+            if(target.isOnline()) {
+                Player punished = (Player) target;
+                punished.kickPlayer("You have been perm banned");
+            }
         } else if(ActivePunishments.getAmount(target) == 1) {
-            if(ActivePunishments.getType(target).get(0).equals("Chat")) {
-                insert(issuer, target, type, 4, reason, new Timestamp(System.currentTimeMillis()), permanent);
+            if(ActivePunishments.getType(target).get(0).equalsIgnoreCase("Chat")) {
+                insert(issuer, target, type, 4, reason, new Timestamp(System.currentTimeMillis()), true);
+                if(target.isOnline()) {
+                    Player punished = (Player) target;
+                    punished.kickPlayer("You have been perm banned");
+                }
             } else {
                 MessageUtils.sendCustomMessage(issuer, ChatColor.GOLD + target.getName() + ChatColor.GRAY + "is already banned.");
             }
@@ -42,12 +50,20 @@ public class PunishBan {
         }
     }
 
-    public static void tempBan(Player issuer, OfflinePlayer target, String type, String reason, Timestamp expiration, boolean permanent) throws SQLException {
+    public static void tempBan(Player issuer, OfflinePlayer target, String type, int sev, String reason, Timestamp expiration) throws SQLException {
         if(ActivePunishments.getAmount(target) == 0) {
-            insert(issuer, target, type, 4, reason, expiration, permanent);
+            insert(issuer, target, type, sev, reason, expiration, false);
+            if(target.isOnline()) {
+                Player punished = (Player) target;
+                punished.kickPlayer("You have been temp banned");
+            }
         } else if(ActivePunishments.getAmount(target) == 1) {
-            if(ActivePunishments.getType(target).get(0).equals("Chat")) {
-                insert(issuer, target, type, 4, reason, expiration, permanent);
+            if(ActivePunishments.getType(target).get(0).equalsIgnoreCase("Chat")) {
+                insert(issuer, target, type, 4, reason, expiration, false);
+                if(target.isOnline()) {
+                    Player punished = (Player) target;
+                    punished.kickPlayer("You have been temp banned");
+                }
             } else {
                 MessageUtils.sendCustomMessage(issuer, ChatColor.GOLD + target.getName() + ChatColor.GRAY + "is already banned.");
             }
