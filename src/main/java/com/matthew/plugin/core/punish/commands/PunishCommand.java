@@ -32,7 +32,6 @@ public class PunishCommand implements CommandExecutor {
                                 for (int i = 1; i < args.length; i++) {
                                     reason.append(args[i]).append(" ");
                                 }
-
                                 ServerCore.punishReason.put(player, reason.toString());
                                 PunishUI.openPunishUI(player, target);
                             } else {

@@ -70,7 +70,7 @@ public class PunishListener implements Listener {
                         ServerCore.punishReason.remove(player);
 
                         break;
-                    case 24: //gameplay ban sev 3
+                    case 40: //gameplay ban sev 3
                         time = new Timestamp(System.currentTimeMillis());
                         time.setTime((long) (time.getTime() + 6.048e8)); //7 Days
                         player.closeInventory();
@@ -78,20 +78,20 @@ public class PunishListener implements Listener {
                         ServerCore.punishReason.remove(player);
 
                         break;
-                    case 40: //hacking ban sev 1
+                    case 24: //hacking ban sev 1
                         time = new Timestamp(System.currentTimeMillis());
                         time.setTime((long) (time.getTime() + 8.64e7)); //1 Day
                         player.closeInventory();
-                        PunishBan.tempBan(player, target, "Hacking", 3, ServerCore.punishReason.get(player), time);
+                        PunishBan.tempBan(player, target, "Hacking", 1, ServerCore.punishReason.get(player), time);
                         ServerCore.punishReason.remove(player);
 
                         break;
 
-                    case 33: //hacking b an sev 2
+                    case 33: //hacking ban sev 2
                         time = new Timestamp(System.currentTimeMillis());
                         time.setTime((long) (time.getTime() + 6.048e8)); //7 Days
                         player.closeInventory();
-                        PunishBan.tempBan(player, target, "Hacking", 3, ServerCore.punishReason.get(player), time);
+                        PunishBan.tempBan(player, target, "Hacking", 2, ServerCore.punishReason.get(player), time);
                         ServerCore.punishReason.remove(player);
 
                         break;
@@ -125,7 +125,7 @@ public class PunishListener implements Listener {
     @EventHandler
     public void onClose(InventoryCloseEvent e) {
         if (ChatColor.translateAlternateColorCodes('&', e.getView().getTitle()).contains(ChatColor.GOLD + "Punish - ")) {
-            ServerCore.punishReason.remove(e.getPlayer());
+            //ServerCore.punishReason.remove(e.getPlayer());
         }
     }
 /*

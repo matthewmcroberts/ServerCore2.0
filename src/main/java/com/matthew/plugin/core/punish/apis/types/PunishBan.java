@@ -46,15 +46,16 @@ public class PunishBan {
                     punished.kickPlayer("You have been perm banned");
                 }
             } else {
-                MessageUtils.sendCustomMessage(issuer, ChatColor.GOLD + target.getName() + ChatColor.GRAY + "is already banned.");
+                MessageUtils.sendCustomMessage(issuer, ChatColor.GOLD + target.getName() + ChatColor.GRAY + " is already banned.");
             }
         } else {
-            MessageUtils.sendCustomMessage(issuer, ChatColor.GOLD + target.getName() + ChatColor.GRAY + "is already banned.");
+            MessageUtils.sendCustomMessage(issuer, ChatColor.GOLD + target.getName() + ChatColor.GRAY + " is already banned.");
         }
     }
 
     public static void tempBan(Player issuer, OfflinePlayer target, String type, int sev, String reason, Timestamp expiration) throws SQLException {
         if(ActivePunishments.getAmount(target) == 0) {
+            issuer.sendMessage(reason);
             insert(issuer, target, type, sev, reason, expiration, false);
             PunishUtils.sendTempBanMessage(issuer, target, type, reason, sev, expiration);
             if(target.isOnline()) {
@@ -70,10 +71,10 @@ public class PunishBan {
                     punished.kickPlayer("You have been temp banned");
                 }
             } else {
-                MessageUtils.sendCustomMessage(issuer, ChatColor.GOLD + target.getName() + ChatColor.GRAY + "is already banned.");
+                MessageUtils.sendCustomMessage(issuer, ChatColor.GOLD + target.getName() + ChatColor.GRAY + " is already banned.");
             }
         } else {
-            MessageUtils.sendCustomMessage(issuer, ChatColor.GOLD + target.getName() + ChatColor.GRAY + "is already banned.");
+            MessageUtils.sendCustomMessage(issuer, ChatColor.GOLD + target.getName() + ChatColor.GRAY + " is already banned.");
         }
     }
 
