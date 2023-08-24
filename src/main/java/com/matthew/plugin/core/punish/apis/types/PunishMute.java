@@ -3,6 +3,7 @@ package com.matthew.plugin.core.punish.apis.types;
 import com.matthew.plugin.core.ServerCore;
 import com.matthew.plugin.core.punish.apis.dbquerys.ActivePunishments;
 import com.matthew.plugin.core.utils.MessageUtils;
+import com.matthew.plugin.core.utils.PunishUtils;
 import org.bukkit.BanList;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -31,10 +32,12 @@ public class PunishMute {
     public static void permMute(Player issuer, OfflinePlayer target, String reason) throws SQLException {
         if(ActivePunishments.getAmount(target) == 0) {
             insert(issuer, target, "Chat", 4, reason, new Timestamp(System.currentTimeMillis()), true);
+            PunishUtils.sendPermMuteMessages(issuer, target, reason);
         } else if(ActivePunishments.getAmount(target) == 1) {
             if(ActivePunishments.getType(target).get(0).equalsIgnoreCase("Hacking") ||
                     ActivePunishments.getType(target).get(0).equalsIgnoreCase("Gameplay")) {
                 insert(issuer, target, "Chat", 4, reason, new Timestamp(System.currentTimeMillis()), true);
+                PunishUtils.sendPermMuteMessages(issuer, target, reason);
             } else {
                 MessageUtils.sendCustomMessage(issuer, ChatColor.GOLD + target.getName() + ChatColor.GRAY + "is already muted.");
             }
@@ -46,10 +49,12 @@ public class PunishMute {
     public static void tempMute(Player issuer, OfflinePlayer target, int sev, String reason, Timestamp expiration) throws SQLException {
         if(ActivePunishments.getAmount(target) == 0) {
             insert(issuer, target, "Chat", sev, reason, expiration, false);
+            PunishUtils.sendTempMuteMessages(issuer, target, reason, sev, expiration);
         } else if(ActivePunishments.getAmount(target) == 1) {
             if(ActivePunishments.getType(target).get(0).equalsIgnoreCase("Hacking") ||
                     ActivePunishments.getType(target).get(0).equalsIgnoreCase("Gameplay")) {
                 insert(issuer, target, "Chat", 4, reason, expiration, false);
+                PunishUtils.sendTempMuteMessages(issuer, target, reason, sev, expiration);
             } else {
                 MessageUtils.sendCustomMessage(issuer, ChatColor.GOLD + target.getName() + ChatColor.GRAY + "is already muted.");
             }
