@@ -15,8 +15,8 @@ import java.util.Calendar;
 
 public class PunishListener implements Listener {
 
-    @SuppressWarnings("DuplicateBranchesInSwitch")
-    @EventHandler
+    //@SuppressWarnings("DuplicateBranchesInSwitch")
+    /*@EventHandler
     public void onClick(InventoryClickEvent e) {
 
         Player player = (Player) e.getWhoClicked();
@@ -111,7 +111,7 @@ public class PunishListener implements Listener {
         }
     }
 
-   /* @EventHandler
+    @EventHandler
     public void onJoin(PlayerJoinEvent e) {
         Player player = e.getPlayer();
         if (!e.getPlayer().hasPlayedBefore()) {
@@ -130,4 +130,5 @@ public class PunishListener implements Listener {
     }
 
     */
+
 }
