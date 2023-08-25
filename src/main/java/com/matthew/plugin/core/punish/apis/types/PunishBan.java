@@ -55,7 +55,6 @@ public class PunishBan {
 
     public static void tempBan(Player issuer, OfflinePlayer target, String type, int sev, String reason, Timestamp expiration) throws SQLException {
         if(ActivePunishments.getAmount(target) == 0) {
-            issuer.sendMessage(reason);
             insert(issuer, target, type, sev, reason, expiration, false);
             PunishUtils.sendTempBanMessage(issuer, target, type, reason, sev, expiration);
             if(target.isOnline()) {
