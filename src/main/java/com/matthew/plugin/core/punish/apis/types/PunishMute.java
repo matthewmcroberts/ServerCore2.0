@@ -35,10 +35,10 @@ public class PunishMute {
                 insert(issuer, target, 4, reason, new Timestamp(System.currentTimeMillis()), true);
                 PunishUtils.sendPermMuteMessages(issuer, target, reason);
             } else {
-                MessageUtils.sendCustomMessage(issuer, ChatColor.GOLD + target.getName() + ChatColor.GRAY + " is already muted.");
+                MessageUtils.sendCustomMessage(issuer, ChatColor.YELLOW + target.getName() + ChatColor.GRAY + " is already muted.");
             }
         } else {
-            MessageUtils.sendCustomMessage(issuer, ChatColor.GOLD + target.getName() + ChatColor.GRAY + " is already muted.");
+            MessageUtils.sendCustomMessage(issuer, ChatColor.YELLOW + target.getName() + ChatColor.GRAY + " is already muted.");
         }
     }
 
@@ -52,10 +52,10 @@ public class PunishMute {
                 insert(issuer, target, 4, reason, expiration, false);
                 PunishUtils.sendTempMuteMessages(issuer, target, reason, sev, expiration);
             } else {
-                MessageUtils.sendCustomMessage(issuer, ChatColor.GOLD + target.getName() + ChatColor.GRAY + " is already muted.");
+                MessageUtils.sendCustomMessage(issuer, ChatColor.YELLOW + target.getName() + ChatColor.GRAY + " is already muted.");
             }
         } else {
-            MessageUtils.sendCustomMessage(issuer, ChatColor.GOLD + target.getName() + ChatColor.GRAY + " is already muted.");
+            MessageUtils.sendCustomMessage(issuer, ChatColor.YELLOW + target.getName() + ChatColor.GRAY + " is already muted.");
         }
     }
 

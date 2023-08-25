@@ -46,10 +46,10 @@ public class PunishBan {
                     punished.kickPlayer("You have been perm banned");
                 }
             } else {
-                MessageUtils.sendCustomMessage(issuer, ChatColor.GOLD + target.getName() + ChatColor.GRAY + " is already banned.");
+                MessageUtils.sendCustomMessage(issuer, ChatColor.YELLOW + target.getName() + ChatColor.GRAY + " is already banned.");
             }
         } else {
-            MessageUtils.sendCustomMessage(issuer, ChatColor.GOLD + target.getName() + ChatColor.GRAY + " is already banned.");
+            MessageUtils.sendCustomMessage(issuer, ChatColor.YELLOW + target.getName() + ChatColor.GRAY + " is already banned.");
         }
     }
 
@@ -71,10 +71,10 @@ public class PunishBan {
                     punished.kickPlayer("You have been temp banned");
                 }
             } else {
-                MessageUtils.sendCustomMessage(issuer, ChatColor.GOLD + target.getName() + ChatColor.GRAY + " is already banned.");
+                MessageUtils.sendCustomMessage(issuer, ChatColor.YELLOW + target.getName() + ChatColor.GRAY + " is already banned.");
             }
         } else {
-            MessageUtils.sendCustomMessage(issuer, ChatColor.GOLD + target.getName() + ChatColor.GRAY + " is already banned.");
+            MessageUtils.sendCustomMessage(issuer, ChatColor.YELLOW + target.getName() + ChatColor.GRAY + " is already banned.");
         }
     }
 
