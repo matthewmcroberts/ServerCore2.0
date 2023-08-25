@@ -24,7 +24,7 @@ public class PunishListener implements Listener {
         Player player = (Player) e.getWhoClicked();
         Calendar cal = Calendar.getInstance();
 
-        if (ChatColor.translateAlternateColorCodes('&', e.getView().getTitle()).contains(ChatColor.GOLD + "Punish - ") && e.getCurrentItem() != null) {
+        if (ChatColor.translateAlternateColorCodes('&', e.getView().getTitle()).contains(ChatColor.BLUE + "Punish - ") && e.getCurrentItem() != null) {
             e.setCancelled(true);
             if (Bukkit.getOfflinePlayer(e.getView().getTitle().substring(11)) != null) {
                 OfflinePlayer target = Bukkit.getOfflinePlayer(e.getView().getTitle().substring(11));
