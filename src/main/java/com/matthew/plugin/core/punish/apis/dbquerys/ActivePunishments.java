@@ -263,4 +263,28 @@ public class ActivePunishments {
         }
         return 0;
     }
+
+    /**
+     * Get the punishment id/primary key in 'active_punishments' table for a specified punishment type for a player
+     *
+     * @param player Player whose UUID is being queried
+     * @param type the type of punishment the player has whose primary key id is being returned
+     * @return the primary key id representing a specific punishment a player has
+     */
+    public static int getPunishmentId(OfflinePlayer player, String type) throws SQLException {
+        if(exists(player)) {
+            if(type.equalsIgnoreCase("hacking") || type.equalsIgnoreCase("chat") || type.equalsIgnoreCase("gameplay")) {
+                PreparedStatement ps = ServerCore.preparedStatement("SELECT ID FROM active_punishments WHERE UUID = ? AND TYPE = ?");
+                ps.setString(1, player.getUniqueId().toString());
+                type = type.toLowerCase();
+                String body = type.substring(1);
+                String firstLetter = type.substring(0, 1).toUpperCase();
+                String newType = firstLetter + body;
+                ps.setString(1, newType);
+                ResultSet rs = ps.executeQuery();
+                return rs.getInt("ID");
+            }
+        }
+        return 0;
+    }
 }
