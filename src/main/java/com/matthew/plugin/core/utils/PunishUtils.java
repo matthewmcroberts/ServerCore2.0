@@ -59,4 +59,21 @@ public class PunishUtils {
         }
     }
 
+    public static void sendRemoveMessages(Player sender, OfflinePlayer target, String type) {
+        if(type.equalsIgnoreCase("chat")) {
+            sender.sendMessage(ChatColor.BLUE + "Punish> " + ChatColor.GRAY + "Successfully removed " + ChatColor.YELLOW + target.getName() + "'s" + ChatColor.GRAY + " mute.");
+            if(target.isOnline()) {
+                Player punished = (Player) target;
+                punished.sendMessage(ChatColor.BLUE + "Punish> " + ChatColor.GRAY + "You are no longer muted.");
+            }
+        } else {
+            sender.sendMessage(ChatColor.BLUE + "Punish> " + ChatColor.GRAY + "Successfully removed " + ChatColor.YELLOW + target.getName() + "'s" + ChatColor.GRAY + " ban.");
+            if(target.isOnline()) {
+                Player punished = (Player) target;
+                punished.sendMessage(ChatColor.BLUE + "Punish> " + ChatColor.GRAY + "You are no longer banned.");
+            }
+        }
+
+    }
+
 }

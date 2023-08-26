@@ -35,8 +35,8 @@ public class TeleportUtils {
         if (RankUtils.isAdmin(player)) {
             if (target != null) {
                 target.teleport(player.getLocation());
-                MessageUtils.sendCustomMessage(target, "You were teleported to " + ChatColor.GOLD + player.getName());
-                MessageUtils.sendCustomMessage(player, "Successfully teleported " + ChatColor.GOLD + target.getName() + ChatColor.GRAY + " to yourself");
+                MessageUtils.sendCustomMessage(target, "You were teleported to " + ChatColor.YELLOW + player.getName());
+                MessageUtils.sendCustomMessage(player, "Successfully teleported " + ChatColor.YELLOW + target.getName() + ChatColor.GRAY + " to yourself");
             } else {
                 MessageUtils.playerNotFound(player);
             }
@@ -49,8 +49,8 @@ public class TeleportUtils {
         if(RankUtils.isAdmin(sender)) {
             if (player != null && target != null) {
                 player.teleport(target.getLocation());
-                MessageUtils.sendCustomMessage(player, "You were teleported to " + ChatColor.GOLD + target.getName());
-                MessageUtils.sendCustomMessage(sender, "Successfully teleported " + ChatColor.GOLD + player.getName() + ChatColor.GRAY + " to " + ChatColor.GOLD + target.getName());
+                MessageUtils.sendCustomMessage(player, "You were teleported to " + ChatColor.YELLOW + target.getName());
+                MessageUtils.sendCustomMessage(sender, "Successfully teleported " + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " to " + ChatColor.YELLOW + target.getName());
             } else {
                 MessageUtils.playerNotFound(sender);
             }

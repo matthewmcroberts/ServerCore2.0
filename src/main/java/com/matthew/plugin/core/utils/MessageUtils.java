@@ -9,7 +9,7 @@ import java.sql.SQLException;
 public class MessageUtils {
 
     public static void incorrectUsage(Player player, String command) {
-        player.sendMessage(ChatColor.BLUE + ">> " + ChatColor.GRAY + "Incorrect usage. Please use: \n" + ChatColor.BLUE + "    - " + ChatColor.GOLD + command);
+        player.sendMessage(ChatColor.BLUE + ">> " + ChatColor.GRAY + "Incorrect usage. Please use: \n" + ChatColor.BLUE + "    - " + ChatColor.YELLOW + command);
     }
 
     public static void adminRank(Player player) {
@@ -41,7 +41,7 @@ public class MessageUtils {
     }
 
     public static void addToList(Player player, String message) {
-        player.sendMessage(ChatColor.BLUE + "    - " + ChatColor.GOLD + message);
+        player.sendMessage(ChatColor.BLUE + "    - " + ChatColor.YELLOW + message);
     }
 
     public static void helpMessageHeader(Player player) throws SQLException {
