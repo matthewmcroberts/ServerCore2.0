@@ -6,6 +6,7 @@ import com.matthew.plugin.core.punish.ui.PunishUI;
 import com.matthew.plugin.core.utils.MessageUtils;
 import com.matthew.plugin.core.utils.RankUtils;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -39,8 +40,14 @@ public class PunishCommand implements CommandExecutor {
                             }
                         } else {
                                 if (Bukkit.getOfflinePlayer(args[1]) != null) {
-                                    OfflinePlayer target = Bukkit.getOfflinePlayer(args[1]);
-                                    PunishRemove.removePunishment(player, target);
+                                    if(args[2].equalsIgnoreCase("chat") || args[2].equalsIgnoreCase("hacking") || args[2].equalsIgnoreCase("gameplay")) {
+                                        OfflinePlayer target = Bukkit.getOfflinePlayer(args[1]);
+                                        String type = args[2];
+                                        PunishRemove.removePunishment(player, target, type);
+                                    } else {
+                                        MessageUtils.sendCustomMessage(player, "Invalid type. Valid punishment types are:");
+                                        MessageUtils.addToList(player, "Hacking, Chat, Gameplay");
+                                    }
                                 } else {
                                     MessageUtils.playerNotFound(player);
                                 }
@@ -48,10 +55,12 @@ public class PunishCommand implements CommandExecutor {
                     } else if (args.length == 1 && args[0].equalsIgnoreCase("usage")) {
                         MessageUtils.commandUsage(player, "Punish");
                         MessageUtils.addToList(player, "/punish (player) (reason)");
-                        MessageUtils.addToList(player, "/punish remove (player)");
+                        MessageUtils.addToList(player, "/punish remove (player) (punishment_type)");
+                        player.sendMessage(ChatColor.BLUE + "> " + ChatColor.GRAY + "Types:" + ChatColor.YELLOW + " Hacking, Chat, Gameplay");
                     } else {
                         MessageUtils.incorrectUsage(player, "/punish (player) (reason)");
-                        MessageUtils.addToList(player, "/punish remove (player)");
+                        MessageUtils.addToList(player, "/punish remove (player) (punishment_type)");
+                        player.sendMessage(ChatColor.BLUE + "> " + ChatColor.GRAY + "Types:" + ChatColor.YELLOW + " Hacking, Chat, Gameplay");
                     }
                 } else {
                     MessageUtils.modRank(player);
