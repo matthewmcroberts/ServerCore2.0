@@ -280,8 +280,9 @@ public class ActivePunishments {
                 String body = type.substring(1);
                 String firstLetter = type.substring(0, 1).toUpperCase();
                 String newType = firstLetter + body;
-                ps.setString(1, newType);
+                ps.setString(2, newType);
                 ResultSet rs = ps.executeQuery();
+                rs.next();
                 return rs.getInt("ID");
             }
         }
