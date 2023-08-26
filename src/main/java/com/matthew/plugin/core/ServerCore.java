@@ -121,10 +121,10 @@ public final class ServerCore extends JavaPlugin {
         if (connection != null && !connection.isClosed()) {
             return;
         }
-        String database = "MCServer";
+        String database = "mcserver";
         String host = "localhost";
         String username = "root";
-        String password = "";
+        String password = "root";
         int port = 3306;
         connection = DriverManager.getConnection("jdbc:mysql://" + host + ":" + port + "/" + database, username, password);
     }
