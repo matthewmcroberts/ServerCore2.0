@@ -21,10 +21,10 @@ public class RanksListener implements Listener {
         Player player = e.getPlayer();
         if (!e.getPlayer().hasPlayedBefore()) {
             try {
-                ResultSet rs = ServerCore.getInstance().preparedStatement("SELECT COUNT(UUID) FROM player_data WHERE UUID = '" + player.getUniqueId().toString() + "';").executeQuery();
+                ResultSet rs = ServerCore.preparedStatement("SELECT COUNT(UUID) FROM player_data WHERE UUID = '" + player.getUniqueId().toString() + "';").executeQuery();
                 rs.next();
                 if (rs.getInt(1) == 0) { //Meaning 0 records match the players UUID, so player doesn't exist in the Database
-                    ServerCore.getInstance().preparedStatement("INSERT INTO player_data(UUID, RANK) VALUES ('" + player.getUniqueId().toString() + "'," + "'MEMBER');").executeUpdate();
+                    ServerCore.preparedStatement("INSERT INTO player_data(UUID, RANKS) VALUES ('" + player.getUniqueId().toString() + "'," + "'MEMBER');").executeUpdate();
                     RankManager.setRank(player.getUniqueId(), Ranks.MEMBER);
                 }
             } catch (SQLException ex) {

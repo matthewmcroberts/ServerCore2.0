@@ -19,7 +19,7 @@ public class RankManager {
      */
     public static void setRank(Player player, Ranks rank) {
         try {
-            ServerCore.preparedStatement("UPDATE player_data SET RANK = '" + rank.getName() + "' WHERE UUID = '" + player.getUniqueId() + "';").executeUpdate();
+            ServerCore.preparedStatement("UPDATE player_data SET RANKS = '" + rank.getName() + "' WHERE UUID = '" + player.getUniqueId() + "';").executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -33,7 +33,7 @@ public class RankManager {
      */
     public static void setRank(UUID uuid, Ranks rank) {
         try {
-            ServerCore.preparedStatement("UPDATE player_data SET RANK = '" + rank.getName() + "' WHERE UUID = '" + uuid + "';").executeUpdate();
+            ServerCore.preparedStatement("UPDATE player_data SET RANKS = '" + rank.getName() + "' WHERE UUID = '" + uuid + "';").executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -47,7 +47,7 @@ public class RankManager {
      */
     public static void setRank(OfflinePlayer player, Ranks rank) {
         try {
-            ServerCore.preparedStatement("UPDATE player_data SET RANK = '" + rank.getName() + "' WHERE UUID = '" + player.getUniqueId() + "';").executeUpdate();
+            ServerCore.preparedStatement("UPDATE player_data SET RANKS = '" + rank.getName() + "' WHERE UUID = '" + player.getUniqueId() + "';").executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -65,7 +65,7 @@ public class RankManager {
 
         ResultSet rs2 = ServerCore.preparedStatement("SELECT * FROM player_data WHERE UUID = '" + player.getUniqueId() + "';").executeQuery();
         rs2.next();
-        String rank2 = rs2.getString("RANK");
+        String rank2 = rs2.getString("RANKS");
 
         return Ranks.valueOf(rank2);
     }
@@ -81,7 +81,7 @@ public class RankManager {
 
         ResultSet rs2 = ServerCore.preparedStatement("SELECT * FROM player_data WHERE UUID = '" + uuid + "';").executeQuery();
         rs2.next();
-        String rank2 = rs2.getString("RANK");
+        String rank2 = rs2.getString("RANKS");
 
         return Ranks.valueOf(rank2);
     }
