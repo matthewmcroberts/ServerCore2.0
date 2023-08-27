@@ -288,4 +288,40 @@ public class ActivePunishments {
         }
         return 0;
     }
+
+    /**
+     * Check if player currently has a punishment of type "hacking" or "gameplay"
+     * meaning that the player is currently banned from the server
+     *
+     * @param player Player whose UUID is being queried
+     * @return condition whether player is banned or not
+     */
+    public static boolean isBanned(OfflinePlayer player) throws SQLException {
+        if(exists(player)) {
+            for(String type: getType(player)) {
+                if(type.equalsIgnoreCase("hacking") || type.equalsIgnoreCase("gameplay")) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Check if player currently has a punishment of type chat
+     * meaning that the player is currently muted from chat
+     *
+     * @param player Player whose UUID is being queried
+     * @return condition whether player is muted or not
+     */
+    public static boolean isMuted(OfflinePlayer player) throws SQLException {
+        if(exists(player)) {
+            for(String type: getType(player)) {
+                if(type.equalsIgnoreCase("chat")) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 }
