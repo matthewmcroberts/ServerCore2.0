@@ -34,6 +34,7 @@ public class PunishBan {
         if(ActivePunishments.getAmount(target) == 0) {
             insert(issuer, target, type, 4, reason, new Timestamp(System.currentTimeMillis()), true);
             PunishUtils.sendPermBanMessage(issuer, target, type, reason);
+            ServerCore.punishReason.remove(issuer);
             if(target.isOnline()) {
                 Player punished = (Player) target;
                 punished.kickPlayer(ChatColor.translateAlternateColorCodes('&', "§c§lYou have been Permanently banned\n§7Reason:§f " + reason));
@@ -42,6 +43,7 @@ public class PunishBan {
             if(ActivePunishments.getType(target).get(0).equalsIgnoreCase("Chat")) {
                 insert(issuer, target, type, 4, reason, new Timestamp(System.currentTimeMillis()), true);
                 PunishUtils.sendPermBanMessage(issuer, target, type, reason);
+                ServerCore.punishReason.remove(issuer);
                 if(target.isOnline()) {
                     Player punished = (Player) target;
                     punished.kickPlayer(ChatColor.translateAlternateColorCodes('&', "§c§lYou have been Permanently banned\n§7Reason:§f " + reason));
@@ -58,6 +60,7 @@ public class PunishBan {
         if(ActivePunishments.getAmount(target) == 0) {
             insert(issuer, target, type, sev, reason, expiration, false);
             PunishUtils.sendTempBanMessage(issuer, target, type, reason, sev, expiration);
+            ServerCore.punishReason.remove(issuer);
             if(target.isOnline()) {
                 Player punished = (Player) target;
                 punished.kickPlayer(ChatColor.translateAlternateColorCodes('&', "§c§lYou have been banned\n§7Reason:§f " + reason + "\n§7Expires: §f" + new SimpleDateFormat("MM/dd/yyyy HH:mm:ss").format(expiration)));
@@ -66,6 +69,7 @@ public class PunishBan {
             if(ActivePunishments.getType(target).get(0).equalsIgnoreCase("Chat")) {
                 insert(issuer, target, type, 4, reason, expiration, false);
                 PunishUtils.sendTempBanMessage(issuer, target, type, reason, sev, expiration);
+                ServerCore.punishReason.remove(issuer);
                 if(target.isOnline()) {
                     Player punished = (Player) target;
                     punished.kickPlayer(ChatColor.translateAlternateColorCodes('&', "§c§lYou have been banned\n§7Reason:§f " + reason + "\n§7Expires: §f" + new SimpleDateFormat("MM/dd/yyyy HH:mm:ss").format(expiration)));

@@ -29,11 +29,13 @@ public class PunishMute {
         if(ActivePunishments.getAmount(target) == 0) {
             insert(issuer, target, 4, reason, new Timestamp(System.currentTimeMillis()), true);
             PunishUtils.sendPermMuteMessages(issuer, target, reason);
+            ServerCore.punishReason.remove(issuer);
         } else if(ActivePunishments.getAmount(target) == 1) {
             if(ActivePunishments.getType(target).get(0).equalsIgnoreCase("Hacking") ||
                     ActivePunishments.getType(target).get(0).equalsIgnoreCase("Gameplay")) {
                 insert(issuer, target, 4, reason, new Timestamp(System.currentTimeMillis()), true);
                 PunishUtils.sendPermMuteMessages(issuer, target, reason);
+                ServerCore.punishReason.remove(issuer);
             } else {
                 MessageUtils.sendCustomMessage(issuer, ChatColor.YELLOW + target.getName() + ChatColor.GRAY + " is already muted.");
             }
@@ -46,11 +48,13 @@ public class PunishMute {
         if(ActivePunishments.getAmount(target) == 0) {
             insert(issuer, target, sev, reason, expiration, false);
             PunishUtils.sendTempMuteMessages(issuer, target, reason, sev, expiration);
+            ServerCore.punishReason.remove(issuer);
         } else if(ActivePunishments.getAmount(target) == 1) {
             if(ActivePunishments.getType(target).get(0).equalsIgnoreCase("Hacking") ||
                     ActivePunishments.getType(target).get(0).equalsIgnoreCase("Gameplay")) {
                 insert(issuer, target, 4, reason, expiration, false);
                 PunishUtils.sendTempMuteMessages(issuer, target, reason, sev, expiration);
+                ServerCore.punishReason.remove(issuer);
             } else {
                 MessageUtils.sendCustomMessage(issuer, ChatColor.YELLOW + target.getName() + ChatColor.GRAY + " is already muted.");
             }
