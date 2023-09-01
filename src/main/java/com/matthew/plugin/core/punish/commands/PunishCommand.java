@@ -1,6 +1,7 @@
 package com.matthew.plugin.core.punish.commands;
 
 import com.matthew.plugin.core.ServerCore;
+import com.matthew.plugin.core.punish.Punishments;
 import com.matthew.plugin.core.punish.apis.types.PunishRemove;
 import com.matthew.plugin.core.punish.ui.PunishUI;
 import com.matthew.plugin.core.utils.MessageUtils;
@@ -26,31 +27,25 @@ public class PunishCommand implements CommandExecutor {
                 if (RankUtils.isMod(player)) {
                     if (args.length >= 2) {
                         if (!args[0].equalsIgnoreCase("remove")) {
-                            if (Bukkit.getOfflinePlayer(args[0]) != null) {
-                                OfflinePlayer target = Bukkit.getOfflinePlayer(args[0]);
+                            Bukkit.getOfflinePlayer(args[0]);
+                            OfflinePlayer target = Bukkit.getOfflinePlayer(args[0]);
 
-                                StringBuilder reason = new StringBuilder();
-                                for (int i = 1; i < args.length; i++) {
-                                    reason.append(args[i]).append(" ");
-                                }
-                                ServerCore.punishReason.put(player, reason.toString());
-                                PunishUI.openPunishUI(player, target);
-                            } else {
-                                MessageUtils.playerNotFound(player);
+                            StringBuilder reason = new StringBuilder();
+                            for (int i = 1; i < args.length; i++) {
+                                reason.append(args[i]).append(" ");
                             }
+                            ServerCore.punishReason.put(player, reason.toString());
+                            PunishUI.openPunishUI(player, target);
                         } else {
-                                if (Bukkit.getOfflinePlayer(args[1]) != null) {
-                                    if(args[2].equalsIgnoreCase("chat") || args[2].equalsIgnoreCase("hacking") || args[2].equalsIgnoreCase("gameplay")) {
-                                        OfflinePlayer target = Bukkit.getOfflinePlayer(args[1]);
-                                        String type = args[2];
-                                        PunishRemove.removePunishment(player, target, type);
-                                    } else {
-                                        MessageUtils.sendCustomMessage(player, "Invalid type. Valid punishment types are:");
-                                        MessageUtils.addToList(player, "Hacking, Chat, Gameplay");
-                                    }
-                                } else {
-                                    MessageUtils.playerNotFound(player);
-                                }
+                            Bukkit.getOfflinePlayer(args[1]);
+                            if(args[2].equalsIgnoreCase(Punishments.CHAT.getName()) || args[2].equalsIgnoreCase(Punishments.HACKING.getName()) || args[2].equalsIgnoreCase(Punishments.GAMEPLAY.getName())) {
+                                OfflinePlayer target = Bukkit.getOfflinePlayer(args[1]);
+                                String type = args[2];
+                                PunishRemove.removePunishment(player, target, Punishments.valueOf(type.toUpperCase()));
+                            } else {
+                                MessageUtils.sendCustomMessage(player, "Invalid type. Valid punishment types are:");
+                                MessageUtils.addToList(player, "Hacking, Chat, Gameplay");
+                            }
                         }
                     } else if (args.length == 1 && args[0].equalsIgnoreCase("usage")) {
                         MessageUtils.commandUsage(player, "Punish");
