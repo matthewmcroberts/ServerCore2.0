@@ -1,6 +1,7 @@
 package com.matthew.plugin.core.punish.apis.types;
 
 import com.matthew.plugin.core.ServerCore;
+import com.matthew.plugin.core.punish.Punishments;
 import com.matthew.plugin.core.punish.apis.dbquerys.ActivePunishments;
 import com.matthew.plugin.core.utils.MessageUtils;
 import com.matthew.plugin.core.utils.PunishUtils;
@@ -30,19 +31,19 @@ public class PunishBan {
     // active BOOLEAN
     // permanent BOOLEAN
 
-    public static void permBan(Player issuer, OfflinePlayer target, String type, String reason) throws SQLException {
+    public static void permBan(Player issuer, OfflinePlayer target, Punishments type, String reason) throws SQLException {
         if(ActivePunishments.getAmount(target) == 0) {
             insert(issuer, target, type, 4, reason, new Timestamp(System.currentTimeMillis()), true);
-            PunishUtils.sendPermBanMessage(issuer, target, type, reason);
+            PunishUtils.sendPermBanMessage(issuer, target, type.getName(), reason);
             ServerCore.punishReason.remove(issuer);
             if(target.isOnline()) {
                 Player punished = (Player) target;
                 punished.kickPlayer(ChatColor.translateAlternateColorCodes('&', "§c§lYou have been Permanently banned\n§7Reason:§f " + reason));
             }
         } else if(ActivePunishments.getAmount(target) == 1) {
-            if(ActivePunishments.getType(target).get(0).equalsIgnoreCase("Chat")) {
+            if(ActivePunishments.getBanType(target) == null) { //meaning player is not banned
                 insert(issuer, target, type, 4, reason, new Timestamp(System.currentTimeMillis()), true);
-                PunishUtils.sendPermBanMessage(issuer, target, type, reason);
+                PunishUtils.sendPermBanMessage(issuer, target, type.getName(), reason);
                 ServerCore.punishReason.remove(issuer);
                 if(target.isOnline()) {
                     Player punished = (Player) target;
@@ -56,19 +57,19 @@ public class PunishBan {
         }
     }
 
-    public static void tempBan(Player issuer, OfflinePlayer target, String type, int sev, String reason, Timestamp expiration) throws SQLException {
+    public static void tempBan(Player issuer, OfflinePlayer target, Punishments type, int sev, String reason, Timestamp expiration) throws SQLException {
         if(ActivePunishments.getAmount(target) == 0) {
             insert(issuer, target, type, sev, reason, expiration, false);
-            PunishUtils.sendTempBanMessage(issuer, target, type, reason, sev, expiration);
+            PunishUtils.sendTempBanMessage(issuer, target, type.getName(), reason, sev, expiration);
             ServerCore.punishReason.remove(issuer);
             if(target.isOnline()) {
                 Player punished = (Player) target;
                 punished.kickPlayer(ChatColor.translateAlternateColorCodes('&', "§c§lYou have been banned\n§7Reason:§f " + reason + "\n§7Expires: §f" + new SimpleDateFormat("MM/dd/yyyy HH:mm:ss").format(expiration)));
             }
         } else if(ActivePunishments.getAmount(target) == 1) {
-            if(ActivePunishments.getType(target).get(0).equalsIgnoreCase("Chat")) {
+            if(ActivePunishments.getBanType(target) == null) { //meaning player is not banned
                 insert(issuer, target, type, 4, reason, expiration, false);
-                PunishUtils.sendTempBanMessage(issuer, target, type, reason, sev, expiration);
+                PunishUtils.sendTempBanMessage(issuer, target, type.getName(), reason, sev, expiration);
                 ServerCore.punishReason.remove(issuer);
                 if(target.isOnline()) {
                     Player punished = (Player) target;
@@ -82,11 +83,11 @@ public class PunishBan {
         }
     }
 
-    private static void insert(Player issuer, OfflinePlayer target, String type, int sev, String reason, Timestamp expiration, boolean permanent) throws SQLException {
+    private static void insert(Player issuer, OfflinePlayer target, Punishments type, int sev, String reason, Timestamp expiration, boolean permanent) throws SQLException {
         PreparedStatement ps = ServerCore.preparedStatement("INSERT INTO active_punishments(ID, UUID, TYPE, SEV, REASON, ISSUED, EXPIRATION, STAFF, ACTIVE, PERMANENT) VALUES(" +
                 "DEFAULT, ?, ?, ?, ?, DEFAULT, ?, ?, DEFAULT, ?);");
         ps.setString(1, target.getUniqueId().toString());
-        ps.setString(2, type);
+        ps.setString(2, type.getName());
         ps.setInt(3, sev);
         ps.setString(4, reason);
         ps.setTimestamp(5, expiration);
