@@ -1,5 +1,6 @@
 package com.matthew.plugin.core.utils;
 
+import com.matthew.plugin.core.punish.Punishments;
 import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
@@ -59,8 +60,8 @@ public class PunishUtils {
         }
     }
 
-    public static void sendRemoveMessages(Player sender, OfflinePlayer target, String type) {
-        if(type.equalsIgnoreCase("chat")) {
+    public static void sendRemoveMessages(Player sender, OfflinePlayer target, Punishments type) {
+        if(type == Punishments.CHAT) {
             sender.sendMessage(ChatColor.BLUE + "Punish> " + ChatColor.GRAY + "Successfully removed " + ChatColor.YELLOW + target.getName() + "'s" + ChatColor.GRAY + " mute.");
             if(target.isOnline()) {
                 Player punished = (Player) target;
@@ -73,6 +74,10 @@ public class PunishUtils {
                 punished.sendMessage(ChatColor.BLUE + "Punish> " + ChatColor.GRAY + "You are no longer banned.");
             }
         }
+
+    }
+
+    public static void sendRemovalMessages(Player sender, OfflinePlayer target, String type) {
 
     }
 
