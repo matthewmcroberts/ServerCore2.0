@@ -23,7 +23,7 @@ public class GamemodeManager {
      */
     public static void giveGamemode(Player player, Player target) {
         target.setGameMode(GameMode.CREATIVE);
-        player.sendMessage(ChatColor.BLUE + ">> " + ChatColor.GRAY + "Set " + ChatColor.GOLD +
+        player.sendMessage(ChatColor.BLUE + ">> " + ChatColor.GRAY + "Set " + ChatColor.YELLOW +
                 target.getName() + "'s " + ChatColor.GRAY +
                 "GameMode creative:" + ChatColor.GREEN + " True.");
         if (target != player) {
@@ -52,7 +52,7 @@ public class GamemodeManager {
      */
     public static void removeGamemode(Player player, Player target) {
         target.setGameMode(GameMode.SURVIVAL);
-        player.sendMessage(ChatColor.BLUE + ">> " + ChatColor.GRAY + "Set " + ChatColor.GOLD +
+        player.sendMessage(ChatColor.BLUE + ">> " + ChatColor.GRAY + "Set " + ChatColor.YELLOW +
                 target.getName() + "'s " + ChatColor.GRAY + "GameMode creative:" + ChatColor.RED +
                 " False.");
         if (target != player) {

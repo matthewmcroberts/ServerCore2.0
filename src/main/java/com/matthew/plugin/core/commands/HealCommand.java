@@ -29,16 +29,16 @@ public class HealCommand implements CommandExecutor {
                                     target.setHealth(20.0);
                                     target.setFoodLevel(20);
                                     if (target != player) {
-                                        player.sendMessage(ChatColor.BLUE + ">> " + ChatColor.GOLD + target.getName() + ChatColor.GRAY + " has been" +
+                                        player.sendMessage(ChatColor.BLUE + ">> " + ChatColor.YELLOW + target.getName() + ChatColor.GRAY + " has been" +
                                                 ChatColor.GREEN + " healed.");
                                         target.sendMessage(ChatColor.BLUE + ">> " + ChatColor.GRAY + "You have been" +
                                                 ChatColor.GREEN + " healed.");
                                     } else {
-                                        player.sendMessage(ChatColor.BLUE + ">> " + ChatColor.GOLD + target.getName() + ChatColor.GRAY + " has been" +
+                                        player.sendMessage(ChatColor.BLUE + ">> " + ChatColor.YELLOW + target.getName() + ChatColor.GRAY + " has been" +
                                                 ChatColor.GREEN + " healed.");
                                     }
                                 } else {
-                                    player.sendMessage(ChatColor.BLUE + ">> " + ChatColor.GRAY + "You cannot heal a player in" + ChatColor.GOLD +
+                                    player.sendMessage(ChatColor.BLUE + ">> " + ChatColor.GRAY + "You cannot heal a player in" + ChatColor.YELLOW +
                                             " creative");
                                 }
                             } else {
@@ -57,7 +57,7 @@ public class HealCommand implements CommandExecutor {
                             player.sendMessage(
                                     ChatColor.BLUE + ">> " + ChatColor.GRAY + "You have been" + ChatColor.GREEN + " healed.");
                         } else {
-                            player.sendMessage(ChatColor.BLUE + ">> " + ChatColor.GRAY + "You cannot heal while in" + ChatColor.GOLD +
+                            player.sendMessage(ChatColor.BLUE + ">> " + ChatColor.GRAY + "You cannot heal while in" + ChatColor.YELLOW +
                                     " creative.");
                         }
                     } else {

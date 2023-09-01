@@ -23,7 +23,7 @@ public class GamemodeListener implements Listener {
             Player target = GamemodeManager.getGamemodeToggle().get(player);
             if (target != null && target.getGameMode() == GameMode.CREATIVE) {
                 target.setGameMode(GameMode.SURVIVAL);
-                target.sendMessage(ChatColor.BLUE + ">> " + ChatColor.GOLD + player.getName() + ChatColor.GRAY + " left. GameMode creative:" + ChatColor.RED + " false.");
+                target.sendMessage(ChatColor.BLUE + ">> " + ChatColor.YELLOW + player.getName() + ChatColor.GRAY + " left. GameMode creative:" + ChatColor.RED + " false.");
                 GamemodeManager.getGamemodeToggle().remove(player);
             }
         }
