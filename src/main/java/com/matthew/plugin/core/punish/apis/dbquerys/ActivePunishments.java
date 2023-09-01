@@ -47,6 +47,20 @@ public class ActivePunishments {
     }
 
     /**
+     * Check if punishment ID currently exists in the 'active_punishments' table
+     *
+     * @param id - Primary key that is being queried
+     * @return condition stating if the id exists or not in the table
+     */
+    private static boolean exists(int id) throws SQLException {
+        PreparedStatement ps = ServerCore.preparedStatement("SELECT COUNT(UUID) FROM active_punishments WHERE ID = ?;");
+        ps.setInt(1, id);
+        ResultSet rs = ps.executeQuery();
+        rs.next();
+        return rs.getInt(1) != 0;
+    }
+
+    /**
      * Get the time remaining on a player's punishment(s)
      * The Strings in the 'remaining' ArrayList are formatted as follows:
      * - [Years, Days, Hours, Minutes, Seconds]
@@ -136,6 +150,31 @@ public class ActivePunishments {
     }
 
     /**
+     * Get when the punishment(s) that are currently active in the 'active_punishments' table expires
+     *
+     * @param id - Primary key being queried
+     * @return the expiration date(s) as a string in the format of:
+     * 'yyyy-MM-dd HH:mm:ss'
+     */
+    public static ArrayList<String> getExpirationDate(int id) throws SQLException {
+        if (exists(id)) {
+            ArrayList<String> expirations = new ArrayList<>();
+            PreparedStatement ps = ServerCore.preparedStatement("SELECT EXPIRATION FROM active_punishments WHERE ID = ?");
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Timestamp timestamp = Timestamp.valueOf(rs.getTimestamp("EXPIRATION").toLocalDateTime());
+                String expiration = timestamp.toString();
+                expiration = expiration.substring(0, 19);
+                expirations.add(expiration);
+            }
+
+            return expirations;
+        }
+        return null;
+    }
+
+    /**
      * Get when the punishment(s) that are currently active in the 'active_punishments' table were issued
      *
      * @param player - Player whose UUID is being queried
@@ -170,20 +209,18 @@ public class ActivePunishments {
      * @param player - Player whose UUID is being queried
      * @return the type of punishment(s) as a string
      */
-    public static String getBanType(OfflinePlayer player) throws SQLException {
+    public static Punishments getBanType(OfflinePlayer player) throws SQLException {
         if (exists(player)) {
             String type;
             PreparedStatement ps = ServerCore.preparedStatement("SELECT TYPE FROM active_punishments WHERE UUID = ?");
             ps.setString(1, player.getUniqueId().toString());
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                if(rs.getString("TYPE").equalsIgnoreCase("Hacking") || rs.getString("TYPE").equalsIgnoreCase("Gameplay")) {
+                if (rs.getString("TYPE").equalsIgnoreCase(Punishments.HACKING.getName()) || rs.getString("TYPE").equalsIgnoreCase(Punishments.GAMEPLAY.getName())) {
                     type = rs.getString("TYPE");
-                } else {
-                    type = null;
+                    return Punishments.valueOf(type.toUpperCase());
                 }
             }
-            return type;
         }
         return null;
     }
@@ -232,6 +269,26 @@ public class ActivePunishments {
     }
 
     /**
+     * Get the reason(s) in the REASON column under the primary key id. Reasons are TINYTEXT that are up to 255 chars
+     *
+     * @param id - Primary key for punishment in table
+     * @return the reason(s) as a string
+     */
+    public static ArrayList<String> getReason(int id) throws SQLException {
+        if (exists(id)) {
+            ArrayList<String> reasons = new ArrayList<>();
+            PreparedStatement ps = ServerCore.preparedStatement("SELECT REASON FROM active_punishments WHERE ID = ?");
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                reasons.add(rs.getString("REASON"));
+            }
+            return reasons;
+        }
+        return null;
+    }
+
+    /**
      * Get if the punishment(s) issued to the player is permanent
      *
      * @param player - Player whose UUID is being queried
@@ -273,6 +330,26 @@ public class ActivePunishments {
     }
 
     /**
+     * Get the amount of punishments found for a specific id in the 'active_punishments' table
+     *
+     * @param id - Primary key being queried
+     * @return int representing amount of times a player appears in the table
+     */
+    public static int getAmount(int id) throws SQLException {
+        if (exists(id)) {
+            int count = 0;
+            PreparedStatement ps = ServerCore.preparedStatement("SELECT PERMANENT FROM active_punishments WHERE ID = ?");
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                count++;
+            }
+            return count;
+        }
+        return 0;
+    }
+
+    /**
      * Get the punishment id/primary key in 'active_punishments' table for a specified punishment type for a player
      *
      * @param player Player whose UUID is being queried
@@ -281,12 +358,12 @@ public class ActivePunishments {
      */
     public static int getPunishmentId(OfflinePlayer player, Punishments type) throws SQLException {
         if (exists(player)) {
-            if (type.getName().equalsIgnoreCase("hacking") || type.getName().equalsIgnoreCase("chat") || type.getName().equalsIgnoreCase("gameplay")) {
-                PreparedStatement ps = ServerCore.preparedStatement("SELECT ID FROM active_punishments WHERE UUID = ? AND TYPE = ?");
-                ps.setString(1, player.getUniqueId().toString());
-                ps.setString(2, type.getName());
-                ResultSet rs = ps.executeQuery();
-                rs.next();
+            System.out.println(type.getName());
+            PreparedStatement ps = ServerCore.preparedStatement("SELECT ID FROM active_punishments WHERE UUID = ? AND TYPE = ?");
+            ps.setString(1, player.getUniqueId().toString());
+            ps.setString(2, type.getName());
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()) {
                 return rs.getInt("ID");
             }
         }
@@ -302,11 +379,7 @@ public class ActivePunishments {
      */
     public static boolean isBanned(OfflinePlayer player) throws SQLException {
         if (exists(player)) {
-            for (String type : getBanType(player)) {
-                if (type.equalsIgnoreCase("hacking") || type.equalsIgnoreCase("gameplay")) {
-                    return true;
-                }
-            }
+            return getBanType(player) != null;
         }
         return false;
     }
@@ -320,8 +393,11 @@ public class ActivePunishments {
      */
     public static boolean isMuted(OfflinePlayer player) throws SQLException {
         if (exists(player)) {
-            for (String type : getBanType(player)) {
-                if (type.equalsIgnoreCase("chat")) {
+            PreparedStatement ps = ServerCore.preparedStatement("SELECT TYPE FROM active_punishments WHERE UUID = ?");
+            ps.setString(1, player.getUniqueId().toString());
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                if (rs.getString("TYPE").equalsIgnoreCase(Punishments.CHAT.getName())) {
                     return true;
                 }
             }
