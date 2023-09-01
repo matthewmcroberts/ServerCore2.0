@@ -1,6 +1,7 @@
 package com.matthew.plugin.core.punish.apis.types;
 
 import com.matthew.plugin.core.ServerCore;
+import com.matthew.plugin.core.punish.Punishments;
 import com.matthew.plugin.core.punish.apis.dbquerys.ActivePunishments;
 import com.matthew.plugin.core.utils.MessageUtils;
 import com.matthew.plugin.core.utils.PunishUtils;
@@ -31,8 +32,7 @@ public class PunishMute {
             PunishUtils.sendPermMuteMessages(issuer, target, reason);
             ServerCore.punishReason.remove(issuer);
         } else if(ActivePunishments.getAmount(target) == 1) {
-            if(ActivePunishments.getType(target).get(0).equalsIgnoreCase("Hacking") ||
-                    ActivePunishments.getType(target).get(0).equalsIgnoreCase("Gameplay")) {
+            if(ActivePunishments.getBanType(target) != null) {
                 insert(issuer, target, 4, reason, new Timestamp(System.currentTimeMillis()), true);
                 PunishUtils.sendPermMuteMessages(issuer, target, reason);
                 ServerCore.punishReason.remove(issuer);
@@ -50,8 +50,7 @@ public class PunishMute {
             PunishUtils.sendTempMuteMessages(issuer, target, reason, sev, expiration);
             ServerCore.punishReason.remove(issuer);
         } else if(ActivePunishments.getAmount(target) == 1) {
-            if(ActivePunishments.getType(target).get(0).equalsIgnoreCase("Hacking") ||
-                    ActivePunishments.getType(target).get(0).equalsIgnoreCase("Gameplay")) {
+            if(ActivePunishments.getBanType(target) != null) {
                 insert(issuer, target, 4, reason, expiration, false);
                 PunishUtils.sendTempMuteMessages(issuer, target, reason, sev, expiration);
                 ServerCore.punishReason.remove(issuer);
@@ -67,7 +66,7 @@ public class PunishMute {
         PreparedStatement ps = ServerCore.preparedStatement("INSERT INTO active_punishments(ID, UUID, TYPE, SEV, REASON, ISSUED, EXPIRATION, STAFF, ACTIVE, PERMANENT) VALUES(" +
                 "DEFAULT, ?, ?, ?, ?, DEFAULT, ?, ?, DEFAULT, ?);");
         ps.setString(1, target.getUniqueId().toString());
-        ps.setString(2, "Chat");
+        ps.setString(2, Punishments.CHAT.getName());
         ps.setInt(3, sev);
         ps.setString(4, reason);
         ps.setTimestamp(5, expiration);
