@@ -43,7 +43,7 @@ public class PunishRemove {
                 MessageUtils.addToList(sender, "Hacking, Chat, Gameplay");
             }
         } else {
-            MessageUtils.sendCustomMessage(sender, ChatColor.YELLOW + target.getName() + ChatColor.GRAY + " has" +ChatColor.YELLOW + " 0" + ChatColor.GRAY);
+            MessageUtils.sendCustomMessage(sender, ChatColor.YELLOW + target.getName() + ChatColor.GRAY + " has" +ChatColor.YELLOW + " 0" + ChatColor.GRAY + " active punishments found for type: " + ChatColor.YELLOW + type.getName());
         }
     }
 
