@@ -1,6 +1,7 @@
 package com.matthew.plugin.core.events;
 
 import com.matthew.plugin.core.commands.silence.SilenceManager;
+import com.matthew.plugin.core.punish.Punishments;
 import com.matthew.plugin.core.punish.apis.dbquerys.ActivePunishments;
 import com.matthew.plugin.core.ranks.Ranks;
 import com.matthew.plugin.core.ranks.apis.RankManager;
@@ -52,7 +53,11 @@ public class PlayerChatListener implements Listener {
                 e.setCancelled(true);
             }
         } else {
-            player.sendMessage("You are muted");
+            String reason = String.valueOf(ActivePunishments.getReason(player, Punishments.CHAT));
+            String expiration = ActivePunishments.getExpirationDate(player, Punishments.CHAT);
+            player.sendMessage(ChatColor.BLUE + "Punish> " + ChatColor.GRAY + "Shh... You are currently " +
+                    ChatColor.YELLOW + "muted "  + ChatColor.GRAY + "for " + ChatColor.YELLOW + reason +
+                    ChatColor.GRAY + " until " + ChatColor.YELLOW + expiration);
             e.setCancelled(true);
         }
     }
