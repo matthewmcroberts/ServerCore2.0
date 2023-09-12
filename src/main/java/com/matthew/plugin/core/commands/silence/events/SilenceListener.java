@@ -7,7 +7,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerChatEvent;
+import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 
 import java.sql.SQLException;
@@ -26,7 +26,7 @@ public class SilenceListener implements Listener {
     }
 
     @EventHandler
-    public void onChat(PlayerChatEvent e) throws SQLException {
+    public void onChat(AsyncPlayerChatEvent e) throws SQLException {
         Player player = e.getPlayer();
 
         if(SilenceManager.getSilenceManager().contains(player)) {
