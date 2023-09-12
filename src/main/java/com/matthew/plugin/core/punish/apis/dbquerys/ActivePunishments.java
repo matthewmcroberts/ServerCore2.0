@@ -13,7 +13,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.UUID;
 
-public class ActivePunishments {
+public abstract class ActivePunishments {
 
     /**
      * The length of each ArrayList returned by each utility method is 2 as the maximum number of punishments that will be returned from
