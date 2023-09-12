@@ -4,8 +4,6 @@ import com.matthew.plugin.core.ServerCore;
 import com.matthew.plugin.core.utils.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
-import org.bukkit.entity.Player;
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,7 +11,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.UUID;
 
-public class ExpiredPunishments {
+public abstract class ExpiredPunishments {
 
     /**
      * Each ArrayList has the ability to return as many punishments as required as the 'expired_punishments' table holds all
