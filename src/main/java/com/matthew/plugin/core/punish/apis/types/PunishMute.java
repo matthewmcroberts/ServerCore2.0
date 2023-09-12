@@ -32,7 +32,7 @@ public class PunishMute {
             PunishUtils.sendPermMuteMessages(issuer, target, reason);
             ServerCore.punishReason.remove(issuer);
         } else if(ActivePunishments.getAmount(target) == 1) {
-            if(ActivePunishments.getBanType(target) != null) {
+            if(ActivePunishments.getBanType(target) != null) { //meaning the one active punishment is a ban, proceed
                 insert(issuer, target, 4, reason, new Timestamp(System.currentTimeMillis()), true);
                 PunishUtils.sendPermMuteMessages(issuer, target, reason);
                 ServerCore.punishReason.remove(issuer);
