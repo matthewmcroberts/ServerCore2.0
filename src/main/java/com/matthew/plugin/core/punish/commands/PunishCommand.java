@@ -2,7 +2,6 @@ package com.matthew.plugin.core.punish.commands;
 
 import com.matthew.plugin.core.ServerCore;
 import com.matthew.plugin.core.punish.Punishments;
-import com.matthew.plugin.core.punish.apis.types.PunishBan;
 import com.matthew.plugin.core.punish.apis.types.PunishRemove;
 import com.matthew.plugin.core.punish.ui.PunishUI;
 import com.matthew.plugin.core.utils.MessageUtils;

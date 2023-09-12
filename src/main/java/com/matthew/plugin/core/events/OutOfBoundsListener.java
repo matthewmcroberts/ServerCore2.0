@@ -1,7 +1,6 @@
 package com.matthew.plugin.core.events;
 
 import org.bukkit.Location;
-import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -13,7 +12,6 @@ public class OutOfBoundsListener implements Listener {
     public void onPlayerMove(PlayerMoveEvent e) {
 
         Player player = e.getPlayer();
-        World w = player.getWorld();
 
         double x = player.getLocation().getX();
         double y = player.getLocation().getY();
