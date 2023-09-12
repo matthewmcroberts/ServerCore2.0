@@ -57,7 +57,7 @@ public class PlayerChatListener implements Listener {
             String expiration = ActivePunishments.getExpirationDate(player, Punishments.CHAT);
             player.sendMessage(ChatColor.BLUE + "Punish> " + ChatColor.GRAY + "Shh... You are currently " +
                     ChatColor.YELLOW + "muted "  + ChatColor.GRAY + "for " + ChatColor.YELLOW + reason +
-                    ChatColor.GRAY + " until " + ChatColor.YELLOW + expiration);
+                    ChatColor.GRAY + "until " + ChatColor.YELLOW + expiration);
             e.setCancelled(true);
         }
     }
